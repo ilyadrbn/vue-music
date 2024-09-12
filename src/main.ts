@@ -1,5 +1,5 @@
 // ? styles
-import "@/assets/styles/main.scss";
+import "@/assets/scss/main.scss";
 
 // ? dependencies
 import { createApp } from "vue";
@@ -7,7 +7,7 @@ import { createPinia } from "pinia";
 import router from "@/router";
 
 // ? components
-import App from "./App.vue";
+import App from "./app.vue";
 
 // ? instances
 const pinia = createPinia();
