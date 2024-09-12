@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "useDefineForClassFields": true,
+        "module": "ESNext",
+        "skipLibCheck": true,
+
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "resolveJsonModule": true,
+        "noEmit": true,
+        "jsx": "preserve",
+        "jsxImportSource": "vue",
+        "esModuleInterop": true,
+
+        "strict": true,
+        "noImplicitThis": true,
+        "verbatimModuleSyntax": true,
+        "forceConsistentCasingInFileNames": true,
+        "composite": true,
+
+        "paths": { "@/*": ["./src/*"] }
+    },
+    "include": ["src/**/*.ts", "src/**/*.vue"]
+}
