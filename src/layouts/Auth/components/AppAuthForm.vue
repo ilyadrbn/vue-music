@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form ref="form">
         <slot></slot>
     </form>
 </template>
@@ -11,3 +11,5 @@ export default defineComponent({
     name: "AppAuthForm",
 });
 </script>
+
+<style lang="scss" scoped></style>

@@ -13,7 +13,12 @@
                 <ul class="mt-1 flex flex-row">
                     <!-- Navigation Links -->
                     <li>
-                        <a class="px-2 text-white" href="#">Login / Register</a>
+                        <a
+                            class="px-2 text-white"
+                            href="#"
+                            @click.prevent="openAuthModal"
+                            >Login / Register</a
+                        >
                     </li>
                     <li>
                         <a class="px-2 text-white" href="#">Manage</a>
@@ -26,8 +31,20 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useAuthStore } from "@/stores/auth-store";
 
 export default defineComponent({
     name: "AppHeader",
+    data() {
+        return {
+            authStore: useAuthStore(),
+        };
+    },
+    methods: {
+        openAuthModal() {
+            this.authStore.$state.isModalOpen =
+                !this.authStore.$state.isModalOpen;
+        },
+    },
 });
 </script>
