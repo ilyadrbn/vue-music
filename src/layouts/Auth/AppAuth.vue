@@ -40,38 +40,66 @@
 
                     <!-- ? Login Form -->
                     <app-auth-form v-if="authMethods.signIn">
-                        <AppAuthInput type="email" />
-                        <AppAuthInput type="password" />
+                        <!-- <AppAuthInput name="email" /> -->
+                        <!-- <AppAuthInput type="email" />
+                        <AppAuthInput type="password" /> -->
 
-                        <AppAuthBtn type="submit" />
+                        <!-- <AppAuthBtn type="submit" /> -->
                     </app-auth-form>
 
                     <!-- ? Registration Form -->
-                    <app-auth-form v-else>
+                    <app-auth-form v-else :validation-schema="signUpSchema">
                         <AppAuthInput
+                            name="name"
                             type="text"
-                            custom-label="Name"
-                            custom-placeholder="Enter Name"
+                            placeholder="Enter Name"
+                            label="Name *"
                         />
-                        <AppAuthInput type="email" />
-                        <AppAuthInput
-                            type="number"
-                            custom-label="Age"
-                            custom-placeholder=""
-                            min="0"
-                            max="100"
-                            step="1"
-                        />
-                        <AppAuthInput type="password" />
-                        <AppAuthInput
-                            type="password1"
-                            custom-label="Confirm Password"
-                            custom-placeholder="Confirm Password"
-                        />
-                        <AppAuthSelect :select-options="selectOptions" />
-                        <AppAuthCheckbox type="checkbox" name="age" />
 
-                        <AppAuthBtn type="submit" />
+                        <AppAuthInput
+                            name="email"
+                            type="text"
+                            placeholder="Enter Email"
+                            label="Email *"
+                        />
+
+                        <AppAuthInput
+                            name="age"
+                            type="number"
+                            placeholder="Enter Age"
+                            label="Age *"
+                        />
+
+                        <AppAuthInput
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            label="Enter password *"
+                        />
+
+                        <AppAuthInput
+                            name="confirm_password"
+                            type="password"
+                            placeholder="Password"
+                            label="Confirm password *"
+                        />
+
+                        <AppAuthInput
+                            as="select"
+                            name="country"
+                            label="Country"
+                            :countries
+                        />
+
+                        <AppAuthInput
+                            name="tos"
+                            type="checkbox"
+                            placeholder="Password"
+                            label="Accept terms of service *"
+                            :value="1"
+                        />
+
+                        <!--<AppAuthBtn type="submit" /> -->
                     </app-auth-form>
                 </div>
             </div>
@@ -82,28 +110,25 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { IAuthMethod } from "@/interfaces/auth-interfaces";
+import ValidationShema from "./validation-schema";
 
 import AppAuthTabs from "@/layouts/Auth/components/AppAuthTabs.vue";
-import AppAuthInput from "@/layouts/Auth/components/AppAuthInput.vue";
-import AppAuthBtn from "@/layouts/Auth/components/AppAuthBtn.vue";
-import AppAuthSelect from "@/layouts/Auth/components/AppAuthSelect.vue";
-import AppAuthCheckbox from "@/layouts/Auth/components/AppAuthCheckbox.vue";
 import AppAuthForm from "./components/AppAuthForm.vue";
+import AppAuthInput from "@/layouts/Auth/components/AppAuthInput.vue";
 import { useModalStore } from "@/stores/modal-store";
 
 export default defineComponent({
     name: "AppAuth",
     components: {
+        AppAuthForm,
         AppAuthTabs,
         AppAuthInput,
-        AppAuthBtn,
-        AppAuthSelect,
-        AppAuthCheckbox,
-        AppAuthForm,
     },
     data() {
         return {
-            selectOptions: [
+            modalStore: useModalStore(),
+            countries: [
+                "",
                 "USA",
                 "Mexico",
                 "Germany",
@@ -116,8 +141,11 @@ export default defineComponent({
                 signIn: true,
                 signUp: false,
             } as IAuthMethod,
-            modalStore: useModalStore(),
+            signUpSchema: new ValidationShema(),
         };
+    },
+    mounted() {
+        console.log(this.signUpSchema.age);
     },
     methods: {
         changeAuthMethod(): void {

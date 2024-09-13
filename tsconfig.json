@@ -4,7 +4,6 @@
         "useDefineForClassFields": true,
         "module": "ESNext",
         "skipLibCheck": true,
-        "removeComments": true,
 
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
