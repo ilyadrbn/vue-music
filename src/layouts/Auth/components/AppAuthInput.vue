@@ -3,7 +3,9 @@
         <label class="mb-2 inline-block">{{
             customLabel ?? type.charAt(0).toUpperCase() + type.slice(1)
         }}</label>
-        <input
+        <vee-field
+            as="input"
+            :name="type"
             :type="type"
             class="block w-full rounded border border-gray-300 px-3 py-1.5 text-gray-800 transition duration-500 focus:border-black focus:outline-none"
             :placeholder="customPlaceholder ?? `Enter ${type}`"

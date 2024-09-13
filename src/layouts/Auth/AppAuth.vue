@@ -2,7 +2,7 @@
     <div
         id="modal"
         class="fixed inset-0 z-10 overflow-y-auto"
-        :class="authStore.hiddenAuthClass"
+        :class="modalStore.hiddenClass"
     >
         <div
             class="flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0"
@@ -64,12 +64,12 @@
                         />
                         <AppAuthInput type="password" />
                         <AppAuthInput
-                            type="password"
+                            type="password1"
                             custom-label="Confirm Password"
                             custom-placeholder="Confirm Password"
                         />
                         <AppAuthSelect :select-options="selectOptions" />
-                        <AppAuthCheckbox type="checkbox" />
+                        <AppAuthCheckbox type="checkbox" name="age" />
 
                         <AppAuthBtn type="submit" />
                     </app-auth-form>
@@ -89,7 +89,7 @@ import AppAuthBtn from "@/layouts/Auth/components/AppAuthBtn.vue";
 import AppAuthSelect from "@/layouts/Auth/components/AppAuthSelect.vue";
 import AppAuthCheckbox from "@/layouts/Auth/components/AppAuthCheckbox.vue";
 import AppAuthForm from "./components/AppAuthForm.vue";
-import { useAuthStore } from "@/stores/auth-store";
+import { useModalStore } from "@/stores/modal-store";
 
 export default defineComponent({
     name: "AppAuth",
@@ -116,17 +116,16 @@ export default defineComponent({
                 signIn: true,
                 signUp: false,
             } as IAuthMethod,
-            authStore: useAuthStore(),
+            modalStore: useModalStore(),
         };
     },
-    computed: {},
     methods: {
         changeAuthMethod(): void {
             this.authMethods.signIn = !this.authMethods.signIn;
             this.authMethods.signUp = !this.authMethods.signUp;
         },
         closeAuthModal(): void {
-            this.authStore.isModalOpen = false;
+            this.modalStore.isModalOpen = false;
         },
     },
 });

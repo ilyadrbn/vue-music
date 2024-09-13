@@ -1,19 +1,19 @@
 import { defineStore } from "pinia";
 
-interface IAuthStore {
+interface IModalStore {
     isModalOpen: boolean;
 }
 
-const useAuthStore = defineStore("authStore", {
+const useModalStore = defineStore("modalStore", {
     // ! аналог data
-    state(): IAuthStore {
+    state(): IModalStore {
         return {
             isModalOpen: false as boolean,
         };
     },
     // ! аналог computed
     getters: {
-        hiddenAuthClass({ isModalOpen }) {
+        hiddenClass({ isModalOpen }) {
             return !isModalOpen ? "hidden" : "";
         },
     },
@@ -21,4 +21,4 @@ const useAuthStore = defineStore("authStore", {
     // actions: {},
 });
 
-export { useAuthStore, type IAuthStore };
+export { useModalStore, type IModalStore };

@@ -1,7 +1,7 @@
 <template>
-    <form ref="form">
+    <vee-form>
         <slot></slot>
-    </form>
+    </vee-form>
 </template>
 
 <script lang="ts">
@@ -11,5 +11,3 @@ export default defineComponent({
     name: "AppAuthForm",
 });
 </script>
-
-<style lang="scss" scoped></style>

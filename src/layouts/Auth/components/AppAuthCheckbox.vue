@@ -1,7 +1,12 @@
 <template>
     <div class="mb-3 pl-6">
-        <input :type="type" class="float-left -ml-6 mt-1 h-4 w-4 rounded" />
-        <label class="inline-block">Accept terms of service</label>
+        <input
+            :id="name"
+            :type="type"
+            class="float-left -ml-6 mt-1 h-4 w-4 rounded"
+            :name="name"
+        />
+        <label class="inline-block" :for="name">Accept terms of service</label>
     </div>
 </template>
 
@@ -14,6 +19,11 @@ export default defineComponent({
         type: {
             type: String,
             required: true,
+        },
+        name: {
+            type: String,
+            required: false,
+            default: null,
         },
     },
 });
