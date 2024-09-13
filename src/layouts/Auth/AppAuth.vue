@@ -48,7 +48,7 @@
                     </app-auth-form>
 
                     <!-- ? Registration Form -->
-                    <app-auth-form v-else :validation-schema="signUpSchema">
+                    <app-auth-form v-else :validation-schema="signUpValidationSchema">
                         <AppAuthInput
                             name="name"
                             type="text"
@@ -109,8 +109,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { IAuthMethod } from "@/interfaces/auth-interfaces";
-import ValidationShema from "./validation-schema";
+import type { IAuthMethod } from "@/interfaces/authInterfaces";
+import SignupValidationSchema from "./signupValidationSchema";
 
 import AppAuthTabs from "@/layouts/Auth/components/AppAuthTabs.vue";
 import AppAuthForm from "./components/AppAuthForm.vue";
@@ -141,12 +141,12 @@ export default defineComponent({
                 signIn: true,
                 signUp: false,
             } as IAuthMethod,
-            signUpSchema: new ValidationShema(),
+            signUpValidationSchema: new SignupValidationSchema(),
         };
     },
-    mounted() {
-        console.log(this.signUpSchema.age);
-    },
+    // mounted() {
+    //     console.log(this.signUpValidationSchema.age);
+    // },
     methods: {
         changeAuthMethod(): void {
             this.authMethods.signIn = !this.authMethods.signIn;
