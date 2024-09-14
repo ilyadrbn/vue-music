@@ -23,6 +23,7 @@ export default {
         app.component("VeeField", VeeField);
 
         defineRule("required", required);
+        defineRule("tos", required);
         defineRule("min", min);
         defineRule("max", max);
         defineRule("alpha_spaces", alphaSpaces);
@@ -48,6 +49,7 @@ export default {
                     } characters.`,
                     integer: `The field ${ctx.field} must be an integer.`,
                     confirmed: `Passwords don't match, please try again.`,
+                    tos: "You must accept the Terms of Service.",
                 };
                 const message = messages[
                     ctx.rule?.name as keyof typeof messages

@@ -4,10 +4,11 @@
         <vee-field v-slot="{ field, errors }" :name="name" :bails="bails">
             <input
                 :id="name"
-                class="'block focus:outline-none' w-full rounded border border-gray-300 px-3 py-1.5 text-gray-800 transition duration-500 focus:border-black"
-                :placeholder="placeholder"
+                class="float-left mr-4 mt-1 h-4 w-4 rounded"
                 :type="type"
                 v-bind="field"
+                :value="isChecked"
+                @click="changeCheckbox"
             />
             <p v-for="error in errors" :key="error" class="text-red-600">
                 {{ error }}
@@ -17,36 +18,20 @@
 </template>
 
 <script lang="ts">
+import type { ISignupValidationShema } from "@/interfaces/authInterfaces";
 import { defineComponent } from "vue";
-import type {
-    ISignupValidationShema,
-    InputType,
-} from "@/interfaces/authInterfaces";
 
 export default defineComponent({
-    name: "AppAuthInput",
+    name: "AppAuthCheckbox",
     props: {
         name: {
             type: String as () => keyof ISignupValidationShema,
             required: true,
         },
         type: {
-            type: String as () => InputType,
-            required: false,
-            default: null,
-            validator: (value: string) => {
-                if (
-                    ["text", "number", "password", "checkbox"].includes(value)
-                ) {
-                    return true;
-                }
-                throw new Error("Invalid input type");
-            },
-        },
-        placeholder: {
             type: String,
             required: false,
-            default: null,
+            default: "checkbox",
         },
         label: {
             type: String,
@@ -59,6 +44,11 @@ export default defineComponent({
             default: true,
         },
     },
+    data: function () {
+        return {
+            isChecked: false,
+        };
+    },
     computed: {
         labelText(): string {
             return (
@@ -67,5 +57,12 @@ export default defineComponent({
             );
         },
     },
+    methods: {
+        changeCheckbox(): void {
+            this.isChecked = !this.isChecked;
+        },
+    },
 });
 </script>
+
+<style scoped></style>

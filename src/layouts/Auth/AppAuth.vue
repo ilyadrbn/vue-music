@@ -1,9 +1,6 @@
 <template>
-    <div
-        id="modal"
-        class="fixed inset-0 z-10 overflow-y-auto"
-        :class="modalStore.hiddenClass"
-    >
+    <div id="modal" class="fixed inset-0 z-10 overflow-y-auto">
+        <!-- :class="modalStore.hiddenClass" -->
         <div
             class="flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0"
         >
@@ -102,6 +99,13 @@
                             label="Country"
                             :countries
                         />
+                      
+                        <AppAuthCheckbox
+                            name="tos"
+                            type="checkbox"
+                            label="Accept Terms of Service *"
+                            :bails="false"
+                        />
 
                         <AppAuthBtn
                             type="submit"
@@ -128,6 +132,7 @@ import AppAuthTabs from "./components/AppAuthTabs.vue";
 import AppAuthForm from "./components/AppAuthForm.vue";
 import AppAuthInput from "./components/AppAuthInput.vue";
 import AppAuthSelect from "./components/AppAuthSelect.vue";
+import AppAuthCheckbox from "./components/AppAuthCheckbox.vue";
 import AppAuthBtn from "./components/AppAuthBtn.vue";
 import AppAuthRegAlert from "./components/AppAuthRegAlert.vue";
 
@@ -138,6 +143,7 @@ export default defineComponent({
         AppAuthForm,
         AppAuthInput,
         AppAuthSelect,
+        AppAuthCheckbox,
         AppAuthBtn,
         AppAuthRegAlert,
     },
@@ -174,14 +180,11 @@ export default defineComponent({
             this.modalStore.isModalOpen = false;
         },
         // ? встроенная функция в VeeValidate
-        register() {
+        register(): void {
             this.regInSubmission = true;
             this.regShowAlert = true;
 
-            setTimeout(() => {
-                // this.regInSubmission = false;
-                // this.regShowAlert = false;
-            }, 3000);
+            setTimeout(() => {}, 3000);
         },
     },
 });

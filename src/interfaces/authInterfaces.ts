@@ -17,6 +17,10 @@ interface ISignupRules {
     confirmed?: string;
 }
 
+interface ITermsOfService {
+    tos: boolean;
+}
+
 interface ISignupValidationShema {
     readonly name: ISignupRules;
     readonly email: ISignupRules;
@@ -24,6 +28,13 @@ interface ISignupValidationShema {
     readonly password: ISignupRules;
     readonly confirm_password: ISignupRules;
     readonly country?: ISignupRules;
+    readonly tos: ITermsOfService;
 }
 
-export type { IAuthMethod, ISignupValidationShema, ISignupRules, InputType };
+export type {
+    IAuthMethod,
+    ISignupValidationShema,
+    ISignupRules,
+    ITermsOfService,
+    InputType,
+};

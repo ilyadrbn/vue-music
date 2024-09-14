@@ -1,6 +1,7 @@
 import type {
     ISignupValidationShema,
     ISignupRules,
+    ITermsOfService,
 } from "@/interfaces/authInterfaces";
 
 export default class SignupValidationSchema implements ISignupValidationShema {
@@ -31,5 +32,8 @@ export default class SignupValidationSchema implements ISignupValidationShema {
     };
     readonly country?: ISignupRules = {
         required: false,
+    };
+    readonly tos: ITermsOfService = {
+        tos: true,
     };
 }
