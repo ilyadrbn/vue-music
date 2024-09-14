@@ -4,7 +4,7 @@ import "@/assets/scss/main.scss";
 // ? plugins
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import validation from "@/plugins/validation";
+import validation from "@/plugins/vee-validation";
 import router from "@/router";
 
 // ? components

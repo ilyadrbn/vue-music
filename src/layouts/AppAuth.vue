@@ -35,16 +35,14 @@
                             <i class="fas fa-times"></i>
                         </div>
                     </div>
-
-                    <AppAuthTabs :auth-methods @switch-tab="changeAuthMethod" />
-
-                    <AppAuthLoginForm
+                    <AuthTabs :auth-methods @switch-tab="changeAuthMethod" />
+                    <AuthLoginForm
                         v-if="authMethods.signIn"
-                        :validation-schema="authValidationSchema"
+                        :validation-schema="signinValidationSchema"
                     />
-                    <AppAuthRegisterForm
+                    <AuthRegisterForm
                         v-else
-                        :validation-schema="authValidationSchema"
+                        :validation-schema="signupValidationSchema"
                     />
                 </div>
             </div>
@@ -54,20 +52,24 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { usePopupStore } from "@/stores/popupStore";
-import type { IAuthMethod } from "@/interfaces/authInterfaces";
-import AuthValidationSchema from "./authValidationSchema";
+import { usePopupStore } from "@/stores/popup-store";
+import type { IAuthMethod } from "@/interfaces/auth-interfaces";
 
-import AppAuthTabs from "./components/AppAuthTabs.vue";
-import AppAuthLoginForm from "./layouts/AppAuthLoginForm.vue";
-import AppAuthRegisterForm from "./layouts/AppAuthRegisterForm.vue";
+import {
+    SignupValidationSchema,
+    SigninValidationSchema,
+} from "./auth/validation-schemas";
+
+import AuthTabs from "./auth/components/AuthTabs.vue";
+import AuthLoginForm from "./auth/layouts/AuthLoginForm.vue";
+import AuthRegisterForm from "./auth/layouts/AuthRegisterForm.vue";
 
 export default defineComponent({
     name: "AppAuth",
     components: {
-        AppAuthTabs,
-        AppAuthLoginForm,
-        AppAuthRegisterForm,
+        AuthTabs,
+        AuthLoginForm,
+        AuthRegisterForm,
     },
     data() {
         return {
@@ -76,7 +78,8 @@ export default defineComponent({
                 signIn: true,
                 signUp: false,
             } as IAuthMethod,
-            authValidationSchema: new AuthValidationSchema(),
+            signupValidationSchema: new SignupValidationSchema(),
+            signinValidationSchema: new SigninValidationSchema(),
         };
     },
     methods: {

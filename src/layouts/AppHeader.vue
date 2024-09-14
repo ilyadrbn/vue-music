@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { usePopupStore } from "@/stores/popupStore";
+import { usePopupStore } from "@/stores/popup-store";
 
 export default defineComponent({
     name: "AppHeader",

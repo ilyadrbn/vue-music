@@ -1,6 +1,8 @@
 <template>
     <div class="mb-3">
-        <label class="mb-2 inline-block select-none" :for="name">{{ labelText }}</label>
+        <label class="mb-2 inline-block select-none" :for="name">{{
+            labelText
+        }}</label>
         <vee-field v-slot="{ field, errors }" :name="name" :bails="bails">
             <input
                 :id="name"
@@ -18,14 +20,14 @@
 </template>
 
 <script lang="ts">
-import type { IAuthValidationSchema } from "@/interfaces/authInterfaces";
+import type { ISignupValidationSchema } from "@/interfaces/auth-interfaces";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: "AppAuthCheckbox",
+    name: "AuthCheckbox",
     props: {
         name: {
-            type: String as () => keyof IAuthValidationSchema,
+            type: String as () => keyof ISignupValidationSchema,
             required: true,
         },
         type: {

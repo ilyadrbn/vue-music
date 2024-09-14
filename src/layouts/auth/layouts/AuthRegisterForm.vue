@@ -1,6 +1,6 @@
 <template>
-    <app-auth-form @submit="register">
-        <AppAuthInput
+    <auth-form @submit="register">
+        <AuthInput
             name="name"
             type="text"
             placeholder="Enter Name"
@@ -8,7 +8,7 @@
             :bails="false"
         />
 
-        <AppAuthInput
+        <AuthInput
             name="email"
             type="text"
             placeholder="Enter Email"
@@ -16,7 +16,7 @@
             :bails="false"
         />
 
-        <AppAuthInput
+        <AuthInput
             name="age"
             type="number"
             placeholder="Enter Age"
@@ -24,7 +24,7 @@
             :bails="false"
         />
 
-        <AppAuthInput
+        <AuthInput
             name="password"
             type="password"
             placeholder="Password"
@@ -33,7 +33,7 @@
             :bails="false"
         />
 
-        <AppAuthInput
+        <AuthInput
             name="confirm_password"
             type="password"
             placeholder="Password"
@@ -42,39 +42,40 @@
             :bails="false"
         />
 
-        <AppAuthSelect as="select" name="country" label="Country" :countries />
+        <AuthSelect as="select" name="country" label="Country" :countries />
 
-        <AppAuthCheckbox
+        <AuthCheckbox
             name="tos"
             type="checkbox"
             label="Accept Terms of Service *"
             :bails="false"
         />
 
-        <app-auth-btn type="submit" :disabled="popupStore.isLoaderOpen">
+        <auth-btn type="submit" :disabled="popupStore.isLoaderOpen">
             Register
-        </app-auth-btn>
-    </app-auth-form>
+        </auth-btn>
+    </auth-form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { usePopupStore } from "@/stores/popupStore";
+import { usePopupStore } from "@/stores/popup-store";
+import type { ISignupValidationSchema } from "@/interfaces/auth-interfaces";
 
-import AppAuthForm from "@/components/AppVeeForm.vue";
-import AppAuthInput from "../components/AppAuthInput.vue";
-import AppAuthSelect from "../components/AppAuthSelect.vue";
-import AppAuthCheckbox from "../components/AppAuthCheckbox.vue";
-import AppAuthBtn from "@/components/AppBtn.vue";
+import AuthForm from "@/components/AppForm.vue";
+import AuthInput from "../components/AuthInput.vue";
+import AuthSelect from "../components/AuthSelect.vue";
+import AuthCheckbox from "../components/AuthCheckbox.vue";
+import AuthBtn from "@/components/AppBtn.vue";
 
 export default defineComponent({
-    name: "AppAuthRegisterForm",
+    name: "AuthRegisterForm",
     components: {
-        AppAuthForm,
-        AppAuthInput,
-        AppAuthBtn,
-        AppAuthSelect,
-        AppAuthCheckbox,
+        AuthForm,
+        AuthInput,
+        AuthBtn,
+        AuthSelect,
+        AuthCheckbox,
     },
     data() {
         return {
@@ -92,8 +93,9 @@ export default defineComponent({
         };
     },
     methods: {
-        register(): void {
-            this.popupStore.isLoaderOpen = true;
+        register(values: ISignupValidationSchema): void {
+            console.log(values);
+            // this.popupStore.isLoaderOpen = true;
         },
     },
 });

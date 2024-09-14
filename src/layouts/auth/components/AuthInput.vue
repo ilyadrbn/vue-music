@@ -22,15 +22,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import type {
-    IAuthValidationSchema,
+    ISignupValidationSchema,
     InputType,
-} from "@/interfaces/authInterfaces";
+} from "@/interfaces/auth-interfaces";
 
 export default defineComponent({
-    name: "AppAuthInput",
+    name: "AuthInput",
     props: {
         name: {
-            type: String as () => keyof IAuthValidationSchema,
+            type: String as () => keyof ISignupValidationSchema,
             required: true,
         },
         type: {

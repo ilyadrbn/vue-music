@@ -1,7 +1,7 @@
 <template>
     <ul class="mb-4 flex flex-wrap">
         <li
-            v-for="(val, title) in formatData"
+            v-for="(val, title) in renamedMethods"
             :key="title"
             class="flex-auto text-center"
         >
@@ -21,10 +21,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { IAuthMethod } from "@/interfaces/authInterfaces";
+import type { IAuthMethod } from "@/interfaces/auth-interfaces";
 
 export default defineComponent({
-    name: "AppAuthTabs",
+    name: "AuthTabs",
     props: {
         authMethods: {
             type: Object as () => IAuthMethod,
@@ -33,7 +33,7 @@ export default defineComponent({
     },
     emits: ["switch-tab"],
     computed: {
-        formatData() {
+        renamedMethods() {
             const { signIn: Login, signUp: Register } = this.authMethods;
             return {
                 Login,

@@ -18,15 +18,17 @@
 </template>
 
 <script lang="ts">
+import type { ISignupValidationSchema } from "@/interfaces/auth-interfaces";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: "AppAuthSelect",
+    name: "AuthSelect",
     props: {
         name: {
-            type: String,
+            type: String as () => keyof ISignupValidationSchema,
             required: true,
         },
+        // ? select value
         as: {
             type: String,
             required: true,

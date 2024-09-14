@@ -8,7 +8,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import AppHeader from "@/layouts/AppHeader.vue";
-import AppAuth from "@/layouts/Auth/AppAuth.vue";
+import AppAuth from "@/layouts/AppAuth.vue";
 import AppLoader from "@/layouts/AppLoader.vue";
 
 export default defineComponent({
