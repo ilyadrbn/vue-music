@@ -31,19 +31,19 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useModalStore } from "@/stores/modalStore";
+import { usePopupStore } from "@/stores/popupStore";
 
 export default defineComponent({
     name: "AppHeader",
     data() {
         return {
-            modalStore: useModalStore(),
+            popupStore: usePopupStore(),
         };
     },
     methods: {
         openAuthModal() {
-            this.modalStore.$state.isModalOpen =
-                !this.modalStore.$state.isModalOpen;
+            this.popupStore.$state.isModalOpen =
+                !this.popupStore.$state.isModalOpen;
         },
     },
 });

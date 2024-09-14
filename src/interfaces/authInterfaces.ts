@@ -5,7 +5,7 @@ interface IAuthMethod {
 
 type InputType = "text" | "number" | "password";
 
-interface ISignupRules {
+interface IAuthRules {
     required: boolean;
     min?: number;
     max?: number;
@@ -17,24 +17,24 @@ interface ISignupRules {
     confirmed?: string;
 }
 
+interface IAuthValidationSchema {
+    readonly name: IAuthRules;
+    readonly email: IAuthRules;
+    readonly age: IAuthRules;
+    readonly password: IAuthRules;
+    readonly confirm_password: IAuthRules;
+    readonly country?: IAuthRules;
+    readonly tos: ITermsOfService;
+}
+
 interface ITermsOfService {
     tos: boolean;
 }
 
-interface ISignupValidationShema {
-    readonly name: ISignupRules;
-    readonly email: ISignupRules;
-    readonly age: ISignupRules;
-    readonly password: ISignupRules;
-    readonly confirm_password: ISignupRules;
-    readonly country?: ISignupRules;
-    readonly tos: ITermsOfService;
-}
-
 export type {
     IAuthMethod,
-    ISignupValidationShema,
-    ISignupRules,
+    IAuthValidationSchema,
+    IAuthRules,
     ITermsOfService,
-    InputType,
+    InputType
 };

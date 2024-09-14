@@ -1,6 +1,9 @@
 <template>
-    <div id="modal" class="fixed inset-0 z-10 overflow-y-auto">
-        <!-- :class="modalStore.hiddenClass" -->
+    <div
+        id="modal"
+        class="fixed inset-0 z-10 overflow-y-auto"
+        :class="popupStore.hiddenClass(popupStore.isModalOpen)"
+    >
         <div
             class="flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0"
         >
@@ -35,86 +38,14 @@
 
                     <AppAuthTabs :auth-methods @switch-tab="changeAuthMethod" />
 
-                    <!-- ? Login Form -->
-                    <app-auth-form v-if="authMethods.signIn">
-                        <!-- <AppAuthInput name="email" /> -->
-                        <!-- <AppAuthInput type="email" />
-                        <AppAuthInput type="password" /> -->
-
-                        <!-- <AppAuthBtn type="submit" /> -->
-                    </app-auth-form>
-
-                    <!-- ? Registration Form -->
-                    <app-auth-form
-                        v-if="authMethods.signUp"
-                        :validation-schema="signUpValidationSchema"
-                        @submit="register"
-                    >
-                        <AppAuthInput
-                            name="name"
-                            type="text"
-                            placeholder="Enter Name"
-                            label="Name *"
-                            :bails="false"
-                        />
-
-                        <AppAuthInput
-                            name="email"
-                            type="text"
-                            placeholder="Enter Email"
-                            label="Email *"
-                            :bails="false"
-                        />
-
-                        <AppAuthInput
-                            name="age"
-                            type="number"
-                            placeholder="Enter Age"
-                            label="Age *"
-                            :bails="false"
-                        />
-
-                        <AppAuthInput
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            label="Enter password *"
-                            autocomplete="password"
-                            :bails="false"
-                        />
-
-                        <AppAuthInput
-                            name="confirm_password"
-                            type="password"
-                            placeholder="Password"
-                            label="Confirm password *"
-                            autocomplete="password"
-                            :bails="false"
-                        />
-
-                        <AppAuthSelect
-                            as="select"
-                            name="country"
-                            label="Country"
-                            :countries
-                        />
-
-                        <AppAuthCheckbox
-                            name="tos"
-                            type="checkbox"
-                            label="Accept Terms of Service *"
-                            :bails="false"
-                        />
-
-                        <AppAuthBtn
-                            type="submit"
-                            :class="{
-                                'pointer-events-none opacity-50':
-                                    regInSubmission,
-                            }"
-                            :disabled="regInSubmission"
-                        />
-                    </app-auth-form>
+                    <AppAuthLoginForm
+                        v-if="authMethods.signIn"
+                        :validation-schema="authValidationSchema"
+                    />
+                    <AppAuthRegisterForm
+                        v-else
+                        :validation-schema="authValidationSchema"
+                    />
                 </div>
             </div>
         </div>
@@ -123,51 +54,29 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useModalStore } from "@/stores/modalStore";
+import { usePopupStore } from "@/stores/popupStore";
 import type { IAuthMethod } from "@/interfaces/authInterfaces";
-import SignupValidationSchema from "./signupValidationSchema";
+import AuthValidationSchema from "./authValidationSchema";
 
 import AppAuthTabs from "./components/AppAuthTabs.vue";
-import AppAuthForm from "./components/AppAuthForm.vue";
-import AppAuthInput from "./components/AppAuthInput.vue";
-import AppAuthSelect from "./components/AppAuthSelect.vue";
-import AppAuthCheckbox from "./components/AppAuthCheckbox.vue";
-import AppAuthBtn from "./components/AppAuthBtn.vue";
-import AppAuthRegAlert from "./components/AppAuthRegAlert.vue";
+import AppAuthLoginForm from "./layouts/AppAuthLoginForm.vue";
+import AppAuthRegisterForm from "./layouts/AppAuthRegisterForm.vue";
 
 export default defineComponent({
     name: "AppAuth",
     components: {
         AppAuthTabs,
-        AppAuthForm,
-        AppAuthInput,
-        AppAuthSelect,
-        AppAuthCheckbox,
-        AppAuthBtn,
-        AppAuthRegAlert,
+        AppAuthLoginForm,
+        AppAuthRegisterForm,
     },
     data() {
         return {
-            modalStore: useModalStore(),
-            countries: [
-                "",
-                "USA",
-                "Mexico",
-                "Germany",
-                "Spain",
-                "France",
-                "Japan",
-                "China",
-            ] as string[],
+            popupStore: usePopupStore(),
             authMethods: {
                 signIn: true,
                 signUp: false,
             } as IAuthMethod,
-            signUpValidationSchema: new SignupValidationSchema(),
-            regInSubmission: false as boolean,
-            regShowAlert: false as boolean,
-            regAlertMsg:
-                "Please wait! Your account is being created." as string,
+            authValidationSchema: new AuthValidationSchema(),
         };
     },
     methods: {
@@ -176,14 +85,7 @@ export default defineComponent({
             this.authMethods.signUp = !this.authMethods.signUp;
         },
         closeAuthModal(): void {
-            this.modalStore.isModalOpen = false;
-        },
-        // ? встроенная функция в VeeValidate
-        register(): void {
-            this.regInSubmission = true;
-            this.regShowAlert = true;
-
-            setTimeout(() => {}, 3000);
+            this.popupStore.isModalOpen = false;
         },
     },
 });

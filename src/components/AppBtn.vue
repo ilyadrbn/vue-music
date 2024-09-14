@@ -1,9 +1,9 @@
 <template>
     <button
         :type="type"
-        class="block w-full rounded bg-purple-600 px-3 py-1.5 text-white transition hover:bg-purple-700"
+        class="block w-full rounded bg-purple-600 px-3 py-1.5 text-white transition hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-50"
     >
-        {{ type.charAt(0).toUpperCase() + type.slice(1) }}
+        <slot></slot>
     </button>
 </template>
 
