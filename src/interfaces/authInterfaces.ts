@@ -26,9 +26,4 @@ interface ISignupValidationShema {
     readonly country?: ISignupRules;
 }
 
-export type {
-    IAuthMethod,
-    ISignupValidationShema,
-    ISignupRules,
-    InputType,
-};
+export type { IAuthMethod, ISignupValidationShema, ISignupRules, InputType };

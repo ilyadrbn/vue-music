@@ -48,18 +48,12 @@
                     </app-auth-form>
 
                     <!-- ? Registration Form -->
+                    <AppAuthRegAlert :reg-alert-msg :reg-show-alert />
                     <app-auth-form
-                        v-else
+                        v-if="authMethods.signUp"
                         :validation-schema="signUpValidationSchema"
                         @submit="register"
                     >
-                        <div
-                            v-if="regShowAlert"
-                            class="mb-4 rounded p-4 text-center font-bold text-white"
-                            :class="{ 'bg-purple-500': regShowAlert }"
-                        >
-                            {{ regAlertMsg }}
-                        </div>
                         <AppAuthInput
                             name="name"
                             type="text"
@@ -127,10 +121,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useModalStore } from "@/stores/modalStore";
-import type {
-    IAuthMethod,
-    ISignupValidationShema,
-} from "@/interfaces/authInterfaces";
+import type { IAuthMethod } from "@/interfaces/authInterfaces";
 import SignupValidationSchema from "./signupValidationSchema";
 
 import AppAuthTabs from "./components/AppAuthTabs.vue";
@@ -138,6 +129,7 @@ import AppAuthForm from "./components/AppAuthForm.vue";
 import AppAuthInput from "./components/AppAuthInput.vue";
 import AppAuthSelect from "./components/AppAuthSelect.vue";
 import AppAuthBtn from "./components/AppAuthBtn.vue";
+import AppAuthRegAlert from "./components/AppAuthRegAlert.vue";
 
 export default defineComponent({
     name: "AppAuth",
@@ -147,6 +139,7 @@ export default defineComponent({
         AppAuthInput,
         AppAuthSelect,
         AppAuthBtn,
+        AppAuthRegAlert,
     },
     data() {
         return {
