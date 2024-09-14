@@ -45,7 +45,6 @@
                     </app-auth-form>
 
                     <!-- ? Registration Form -->
-                    <AppAuthRegAlert :reg-alert-msg :reg-show-alert />
                     <app-auth-form
                         v-if="authMethods.signUp"
                         :validation-schema="signUpValidationSchema"
@@ -99,7 +98,7 @@
                             label="Country"
                             :countries
                         />
-                      
+
                         <AppAuthCheckbox
                             name="tos"
                             type="checkbox"

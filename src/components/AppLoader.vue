@@ -1,14 +1,12 @@
 <template>
-    <div class="mb-4 rounded p-4 text-center font-bold text-white">
-        <slot name="msg"></slot>
-    </div>
+    <div class="absolute left-0 top-0 h-full w-full bg-"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: "AppAuthRegAlert",
+    name: "AppLoader",
 });
 </script>
 
