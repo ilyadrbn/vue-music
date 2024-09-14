@@ -53,6 +53,13 @@
                         :validation-schema="signUpValidationSchema"
                         @submit="register"
                     >
+                        <div
+                            v-if="regShowAlert"
+                            class="mb-4 rounded p-4 text-center font-bold text-white"
+                            :class="{ 'bg-purple-500': regShowAlert }"
+                        >
+                            {{ regAlertMsg }}
+                        </div>
                         <AppAuthInput
                             name="name"
                             type="text"
@@ -102,7 +109,14 @@
                             :countries
                         />
 
-                        <AppAuthBtn type="submit" />
+                        <AppAuthBtn
+                            type="submit"
+                            :class="{
+                                'pointer-events-none opacity-50':
+                                    regInSubmission,
+                            }"
+                            :disabled="regInSubmission"
+                        />
                     </app-auth-form>
                 </div>
             </div>
@@ -152,19 +166,29 @@ export default defineComponent({
                 signUp: false,
             } as IAuthMethod,
             signUpValidationSchema: new SignupValidationSchema(),
+            regInSubmission: false as boolean,
+            regShowAlert: false as boolean,
+            regAlertMsg:
+                "Please wait! Your account is being created." as string,
         };
     },
     methods: {
-        // ? встроенная функция в VeeValidate
-        register(values: ISignupValidationShema) {
-            console.log(values);
-        },
         changeAuthMethod(): void {
             this.authMethods.signIn = !this.authMethods.signIn;
             this.authMethods.signUp = !this.authMethods.signUp;
         },
         closeAuthModal(): void {
             this.modalStore.isModalOpen = false;
+        },
+        // ? встроенная функция в VeeValidate
+        register() {
+            this.regInSubmission = true;
+            this.regShowAlert = true;
+
+            setTimeout(() => {
+                // this.regInSubmission = false;
+                // this.regShowAlert = false;
+            }, 3000);
         },
     },
 });

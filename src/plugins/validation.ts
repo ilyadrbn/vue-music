@@ -56,10 +56,10 @@ export default {
                     : `Field ${ctx.field} is not valid`;
                 return message;
             },
-            // validateOnBlur: true,
-            // validateOnChange: true,
-            // validateOnInput: false,
-            // validateOnModelUpdate: true,
+            validateOnBlur: false,
+            validateOnChange: true,
+            validateOnInput: false,
+            validateOnModelUpdate: true,
         });
     },
 };
