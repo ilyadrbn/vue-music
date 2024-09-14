@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useModalStore } from "@/stores/modal-store";
+import { useModalStore } from "@/stores/modalStore";
 
 export default defineComponent({
     name: "AppHeader",

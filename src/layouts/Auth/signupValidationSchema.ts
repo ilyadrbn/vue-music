@@ -32,7 +32,4 @@ export default class SignupValidationSchema implements ISignupValidationShema {
     readonly country?: ISignupRules = {
         required: false,
     };
-    readonly tos: ISignupRules = {
-        required: true,
-    };
 }

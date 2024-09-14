@@ -48,12 +48,17 @@
                     </app-auth-form>
 
                     <!-- ? Registration Form -->
-                    <app-auth-form v-else :validation-schema="signUpValidationSchema">
+                    <app-auth-form
+                        v-else
+                        :validation-schema="signUpValidationSchema"
+                        @submit="register"
+                    >
                         <AppAuthInput
                             name="name"
                             type="text"
                             placeholder="Enter Name"
                             label="Name *"
+                            :bails="false"
                         />
 
                         <AppAuthInput
@@ -61,6 +66,7 @@
                             type="text"
                             placeholder="Enter Email"
                             label="Email *"
+                            :bails="false"
                         />
 
                         <AppAuthInput
@@ -68,6 +74,7 @@
                             type="number"
                             placeholder="Enter Age"
                             label="Age *"
+                            :bails="false"
                         />
 
                         <AppAuthInput
@@ -75,6 +82,8 @@
                             type="password"
                             placeholder="Password"
                             label="Enter password *"
+                            autocomplete="password"
+                            :bails="false"
                         />
 
                         <AppAuthInput
@@ -82,24 +91,18 @@
                             type="password"
                             placeholder="Password"
                             label="Confirm password *"
+                            autocomplete="password"
+                            :bails="false"
                         />
 
-                        <AppAuthInput
+                        <AppAuthSelect
                             as="select"
                             name="country"
                             label="Country"
                             :countries
                         />
 
-                        <AppAuthInput
-                            name="tos"
-                            type="checkbox"
-                            placeholder="Password"
-                            label="Accept terms of service *"
-                            :value="1"
-                        />
-
-                        <!--<AppAuthBtn type="submit" /> -->
+                        <AppAuthBtn type="submit" />
                     </app-auth-form>
                 </div>
             </div>
@@ -109,20 +112,27 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { IAuthMethod } from "@/interfaces/authInterfaces";
+import { useModalStore } from "@/stores/modalStore";
+import type {
+    IAuthMethod,
+    ISignupValidationShema,
+} from "@/interfaces/authInterfaces";
 import SignupValidationSchema from "./signupValidationSchema";
 
-import AppAuthTabs from "@/layouts/Auth/components/AppAuthTabs.vue";
+import AppAuthTabs from "./components/AppAuthTabs.vue";
 import AppAuthForm from "./components/AppAuthForm.vue";
-import AppAuthInput from "@/layouts/Auth/components/AppAuthInput.vue";
-import { useModalStore } from "@/stores/modal-store";
+import AppAuthInput from "./components/AppAuthInput.vue";
+import AppAuthSelect from "./components/AppAuthSelect.vue";
+import AppAuthBtn from "./components/AppAuthBtn.vue";
 
 export default defineComponent({
     name: "AppAuth",
     components: {
-        AppAuthForm,
         AppAuthTabs,
+        AppAuthForm,
         AppAuthInput,
+        AppAuthSelect,
+        AppAuthBtn,
     },
     data() {
         return {
@@ -144,10 +154,11 @@ export default defineComponent({
             signUpValidationSchema: new SignupValidationSchema(),
         };
     },
-    // mounted() {
-    //     console.log(this.signUpValidationSchema.age);
-    // },
     methods: {
+        // ? встроенная функция в VeeValidate
+        register(values: ISignupValidationShema) {
+            console.log(values);
+        },
         changeAuthMethod(): void {
             this.authMethods.signIn = !this.authMethods.signIn;
             this.authMethods.signUp = !this.authMethods.signUp;

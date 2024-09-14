@@ -3,6 +3,8 @@ interface IAuthMethod {
     signUp: boolean;
 }
 
+type InputType = "text" | "number" | "password";
+
 interface ISignupRules {
     required: boolean;
     min?: number;
@@ -22,7 +24,11 @@ interface ISignupValidationShema {
     readonly password: ISignupRules;
     readonly confirm_password: ISignupRules;
     readonly country?: ISignupRules;
-    readonly tos?: ISignupRules;
 }
 
-export type { IAuthMethod, ISignupValidationShema, ISignupRules };
+export type {
+    IAuthMethod,
+    ISignupValidationShema,
+    ISignupRules,
+    InputType,
+};
