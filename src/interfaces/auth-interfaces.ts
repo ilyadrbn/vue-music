@@ -44,6 +44,19 @@ interface ITermsOfService {
     tos: boolean;
 }
 
+interface ISignupFormData {
+    readonly name: string;
+    readonly email: string;
+    readonly age: number;
+    readonly password: string;
+    readonly country: string | undefined;
+    readonly tos: boolean;
+}
+interface ISigninFormData {
+    readonly email: string;
+    readonly password: string;
+}
+
 export type {
     InputType,
     IAuthMethod,
@@ -52,4 +65,6 @@ export type {
     ITermsOfService,
     ISigninRules,
     ISigninValidationSchema,
+    ISignupFormData,
+    ISigninFormData,
 };

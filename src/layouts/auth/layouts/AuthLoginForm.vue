@@ -1,5 +1,5 @@
 <template>
-    <auth-form @submit="logi">
+    <auth-form @submit="login">
         <AuthInput
             name="email"
             type="text"
@@ -25,8 +25,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { usePopupStore } from "@/stores/popup-store";
-import type { ISigninValidationSchema } from "@/interfaces/auth-interfaces";
+import type { ISigninFormData } from "@/interfaces/auth-interfaces";
 
 import AuthForm from "@/components/AppForm.vue";
 import AuthInput from "../components/AuthInput.vue";
@@ -45,9 +46,25 @@ export default defineComponent({
         };
     },
     methods: {
-        logi(values: ISigninValidationSchema): void {
-            console.log(values);
-            // this.popupStore.isLoaderOpen = true;
+        async login(values: ISigninFormData): Promise<void> {
+            this.popupStore.isLoaderOpen = true;
+            try {
+                await signInWithEmailAndPassword(
+                    getAuth(),
+                    values.email,
+                    values.password,
+                );
+                this.popupStore.msgInfo = "Logged successfully!";
+            } catch (error) {
+                if (error instanceof Error) {
+                    console.table(error);
+                }
+                this.popupStore.msgInfo = "Login failed!";
+            } finally {
+                this.popupStore.isModalOpen = false;
+                this.popupStore.isLoaderOpen = false;
+                this.popupStore.isMsgInfoOpen = true;
+            }
         },
     },
 });

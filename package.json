@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@vee-validate/rules": "^4.13.2",
+        "firebase": "^10.13.1",
         "pinia": "^2.2.2",
         "sass": "^1.78.0",
         "vee-validate": "^4.13.2",

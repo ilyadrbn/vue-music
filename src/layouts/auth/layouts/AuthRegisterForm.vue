@@ -59,8 +59,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { usePopupStore } from "@/stores/popup-store";
-import type { ISignupValidationSchema } from "@/interfaces/auth-interfaces";
+import type { ISignupFormData } from "@/interfaces/auth-interfaces";
 
 import AuthForm from "@/components/AppForm.vue";
 import AuthInput from "../components/AuthInput.vue";
@@ -93,9 +94,26 @@ export default defineComponent({
         };
     },
     methods: {
-        register(values: ISignupValidationSchema): void {
+        async register(values: ISignupFormData): Promise<void> {
             console.log(values);
-            // this.popupStore.isLoaderOpen = true;
+            this.popupStore.isLoaderOpen = true;
+            try {
+                await createUserWithEmailAndPassword(
+                    getAuth(),
+                    values.email,
+                    values.password,
+                );
+                this.popupStore.msgInfo = "Registered successfully!";
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    console.table(error);
+                }
+                this.popupStore.msgInfo = "Registration failed!";
+            } finally {
+                this.popupStore.isModalOpen = false;
+                this.popupStore.isLoaderOpen = false;
+                this.popupStore.isMsgInfoOpen = true;
+            }
         },
     },
 });

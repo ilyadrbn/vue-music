@@ -6,6 +6,7 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import validation from "@/plugins/vee-validation";
 import router from "@/router";
+import "@/plugins/firebase-cfg"
 
 // ? components
 import App from "./App.vue";
