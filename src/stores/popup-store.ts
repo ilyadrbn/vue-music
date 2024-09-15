@@ -4,7 +4,11 @@ interface IPopupStore {
     isModalOpen: boolean;
     isLoaderOpen: boolean;
     isMsgInfoOpen: boolean;
-    msgInfo: string;
+    msgInfo: {
+        title: string;
+        text: string;
+        type: string;
+    };
 }
 
 const usePopupStore = defineStore("popupStore", {
@@ -13,7 +17,11 @@ const usePopupStore = defineStore("popupStore", {
             isModalOpen: false as boolean,
             isLoaderOpen: false as boolean,
             isMsgInfoOpen: false as boolean,
-            msgInfo: "" as string,
+            msgInfo: {
+                title: "",
+                text: "",
+                type: "",
+            },
         };
     },
     actions: {

@@ -1,4 +1,10 @@
 import { initializeApp, type FirebaseOptions } from "firebase/app";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 const process: ImportMetaEnv = import.meta.env;
 
@@ -11,4 +17,17 @@ const firebaseConfig: FirebaseOptions = {
     appId: process.VITE_FIREBASE_APP_ID,
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth();
+const db = getFirestore(app);
+
+const userCollection = collection(db, "users");
+
+export {
+    userCollection,
+    addDoc,
+    auth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+};

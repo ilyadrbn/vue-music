@@ -59,7 +59,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+    auth,
+    createUserWithEmailAndPassword,
+    userCollection,
+    addDoc,
+} from "@/plugins/firebase-cfg";
 import { usePopupStore } from "@/stores/popup-store";
 import type { ISignupFormData } from "@/interfaces/auth-interfaces";
 
@@ -95,24 +100,44 @@ export default defineComponent({
     },
     methods: {
         async register(values: ISignupFormData): Promise<void> {
-            console.log(values);
+            console.log(auth);
             this.popupStore.isLoaderOpen = true;
             try {
                 await createUserWithEmailAndPassword(
-                    getAuth(),
+                    auth,
                     values.email,
                     values.password,
                 );
-                this.popupStore.msgInfo = "Registered successfully!";
-            } catch (error: unknown) {
-                if (error instanceof Error) {
-                    console.table(error);
-                }
-                this.popupStore.msgInfo = "Registration failed!";
-            } finally {
+                await addDoc(userCollection, {
+                    name: values.name,
+                    email: values.email,
+                    age: values.age,
+                    country: values.country || null,
+                });
+                this.popupStore.msgInfo = {
+                    title: "Success",
+                    text: "Registration successful!",
+                    type: "Success",
+                };
                 this.popupStore.isModalOpen = false;
                 this.popupStore.isLoaderOpen = false;
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    console.error(error);
+                }
+                this.popupStore.msgInfo = {
+                    title: "Error",
+                    text: "Registration failed. Please try again.",
+                    type: "Error",
+                };
+                this.popupStore.isLoaderOpen = false;
+            } finally {
+                // this.popupStore.isModalOpen = false;
+                // this.popupStore.isLoaderOpen = false;
                 this.popupStore.isMsgInfoOpen = true;
+                setTimeout(() => {
+                    this.popupStore.isMsgInfoOpen = false;
+                }, 3000);
             }
         },
     },
