@@ -25,8 +25,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { auth, signInWithEmailAndPassword } from "@/plugins/firebase-cfg";
 import { usePopupStore } from "@/stores/popup-store";
+import { useUserStore } from "@/stores/user-store";
 import type { ISigninFormData } from "@/interfaces/auth-interfaces";
 
 import AuthForm from "@/components/AppForm.vue";
@@ -43,25 +43,21 @@ export default defineComponent({
     data() {
         return {
             popupStore: usePopupStore(),
+            userStore: useUserStore(),
         };
     },
     methods: {
         async login(values: ISigninFormData): Promise<void> {
-            console.log(auth);
             this.popupStore.isLoaderOpen = true;
             try {
-                await signInWithEmailAndPassword(
-                    auth,
-                    values.email,
-                    values.password,
-                );
+                await this.userStore.loginUser(values);
+
                 this.popupStore.msgInfo = {
                     title: "Success",
                     text: "Logged in successfully",
                     type: "Success",
                 };
                 this.popupStore.isModalOpen = false;
-                this.popupStore.isLoaderOpen = false;
             } catch (error) {
                 if (error instanceof Error) {
                     console.error(error);
@@ -71,10 +67,8 @@ export default defineComponent({
                     text: "Login failed. Please try again.",
                     type: "Error",
                 };
-                this.popupStore.isLoaderOpen = false;
             } finally {
-                // this.popupStore.isModalOpen = false;
-                // this.popupStore.isLoaderOpen = false;
+                this.popupStore.isLoaderOpen = false;
                 this.popupStore.isMsgInfoOpen = true;
                 setTimeout(() => {
                     this.popupStore.isMsgInfoOpen = false;

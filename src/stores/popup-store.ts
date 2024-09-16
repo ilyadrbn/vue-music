@@ -1,14 +1,15 @@
 import { defineStore } from "pinia";
 
+interface IMsgInfo {
+    title: string;
+    text: string;
+    type: string;
+}
 interface IPopupStore {
     isModalOpen: boolean;
     isLoaderOpen: boolean;
     isMsgInfoOpen: boolean;
-    msgInfo: {
-        title: string;
-        text: string;
-        type: string;
-    };
+    msgInfo: IMsgInfo;
 }
 
 const usePopupStore = defineStore("popupStore", {
@@ -31,4 +32,4 @@ const usePopupStore = defineStore("popupStore", {
     },
 });
 
-export { usePopupStore, type IPopupStore };
+export { usePopupStore, type IPopupStore, type IMsgInfo };

@@ -59,13 +59,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import {
-    auth,
-    createUserWithEmailAndPassword,
-    userCollection,
-    addDoc,
-} from "@/plugins/firebase-cfg";
-import { usePopupStore } from "@/stores/popup-store";
+import { usePopupStore, type IMsgInfo } from "@/stores/popup-store";
+import { useUserStore } from "@/stores/user-store";
 import type { ISignupFormData } from "@/interfaces/auth-interfaces";
 
 import AuthForm from "@/components/AppForm.vue";
@@ -86,6 +81,7 @@ export default defineComponent({
     data() {
         return {
             popupStore: usePopupStore(),
+            userStore: useUserStore(),
             countries: [
                 "",
                 "USA",
@@ -100,40 +96,16 @@ export default defineComponent({
     },
     methods: {
         async register(values: ISignupFormData): Promise<void> {
-            console.log(auth);
             this.popupStore.isLoaderOpen = true;
             try {
-                Promise.all([
-                    await createUserWithEmailAndPassword(
-                        auth,
-                        values.email,
-                        values.password,
-                    ),
-                    await addDoc(userCollection, {
-                        name: values.name,
-                        email: values.email,
-                        age: values.age,
-                        country: values.country || null,
-                    }),
-                ]);
-                // await createUserWithEmailAndPassword(
-                //     auth,
-                //     values.email,
-                //     values.password,
-                // );
-                // await addDoc(userCollection, {
-                //     name: values.name,
-                //     email: values.email,
-                //     age: values.age,
-                //     country: values.country || null,
-                // });
+                await this.userStore.createUser(values);
+
                 this.popupStore.msgInfo = {
                     title: "Success",
                     text: "Registration successful!",
                     type: "Success",
-                };
+                } as IMsgInfo;
                 this.popupStore.isModalOpen = false;
-                this.popupStore.isLoaderOpen = false;
             } catch (error: unknown) {
                 if (error instanceof Error) {
                     console.error(error);
@@ -142,11 +114,9 @@ export default defineComponent({
                     title: "Error",
                     text: "Registration failed. Please try again.",
                     type: "Error",
-                };
-                this.popupStore.isLoaderOpen = false;
+                } as IMsgInfo;
             } finally {
-                // this.popupStore.isModalOpen = false;
-                // this.popupStore.isLoaderOpen = false;
+                this.popupStore.isLoaderOpen = false;
                 this.popupStore.isMsgInfoOpen = true;
                 setTimeout(() => {
                     this.popupStore.isMsgInfoOpen = false;
