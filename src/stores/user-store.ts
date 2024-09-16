@@ -51,7 +51,7 @@ const useUserStore = defineStore("userStore", {
             this.userLoggedIn = true;
         },
 
-        async googleAuth() {
+        async googleAuth(): Promise<void> {
             Promise.all([
                 await signInWithPopup(auth, googleProvider),
                 await setDoc(doc(db, "users", auth.currentUser!.uid), {
@@ -62,6 +62,12 @@ const useUserStore = defineStore("userStore", {
                 }),
             ]);
             this.userLoggedIn = true;
+        },
+
+        async signOut(): Promise<void> {
+            await auth.signOut();
+            this.userLoggedIn = false;
+            window.location.reload();
         },
     },
 });

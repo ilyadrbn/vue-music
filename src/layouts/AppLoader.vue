@@ -1,7 +1,7 @@
 <template>
     <div
         id="loader"
-        class="fixed left-0 top-0 z-40 flex h-full w-full items-center justify-center bg-slate-600 opacity-50"
+        class="fixed left-0 top-0 z-40 flex h-full w-full items-center justify-center bg-slate-600 opacity-90"
         :class="hiddenClass"
     >
         <div class="spinner"></div>

@@ -12,7 +12,7 @@
                 <!-- Primary Navigation -->
                 <ul class="mt-1 flex flex-row">
                     <!-- Navigation Links -->
-                    <li>
+                    <li v-if="!userStore.userLoggedIn">
                         <a
                             class="px-2 text-white"
                             href="#"
@@ -20,9 +20,19 @@
                             >Login / Register</a
                         >
                     </li>
-                    <li>
-                        <a class="px-2 text-white" href="#">Manage</a>
-                    </li>
+                    <template v-else>
+                        <li>
+                            <a class="px-2 text-white" href="#">Manage</a>
+                        </li>
+                        <li>
+                            <a
+                                class="px-2 text-white"
+                                href="#"
+                                @click.prevent="userStore.signOut"
+                                >Log Out</a
+                            >
+                        </li>
+                    </template>
                 </ul>
             </div>
         </nav>
@@ -32,12 +42,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { usePopupStore } from "@/stores/popup-store";
+import { useUserStore } from "@/stores/user-store";
 
 export default defineComponent({
     name: "AppHeader",
     data() {
         return {
             popupStore: usePopupStore(),
+            userStore: useUserStore(),
         };
     },
     methods: {

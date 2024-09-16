@@ -10,6 +10,7 @@
 import { defineComponent } from "vue";
 import { auth } from "@/plugins/firebase-cfg";
 import { useUserStore } from "@/stores/user-store";
+import { usePopupStore } from "@/stores/popup-store";
 
 import AppHeader from "@/layouts/AppHeader.vue";
 import AppAuth from "@/layouts/AppAuth.vue";
@@ -27,9 +28,11 @@ export default defineComponent({
     data() {
         return {
             userStore: useUserStore(),
+            popupStore: usePopupStore(),
         };
     },
     created() {
+        this.popupStore.isLoaderOpen = true;
         auth.authStateReady().then(() => {
             if (auth.currentUser) {
                 console.log("user logged in");
@@ -37,6 +40,7 @@ export default defineComponent({
             } else {
                 console.log("user not logged in");
             }
+            this.popupStore.isLoaderOpen = false;
         });
     },
     methods: {},
