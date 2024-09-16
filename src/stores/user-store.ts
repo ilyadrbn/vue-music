@@ -3,8 +3,9 @@ import {
     auth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    userCollection,
-    addDoc,
+    db,
+    doc,
+    setDoc,
 } from "@/plugins/firebase-cfg";
 import type {
     ISignupFormData,
@@ -29,7 +30,7 @@ const useUserStore = defineStore("userStore", {
                     values.email,
                     values.password,
                 ),
-                await addDoc(userCollection, {
+                await setDoc(doc(db, "users", auth.currentUser!.uid), {
                     name: values.name,
                     email: values.email,
                     age: values.age,

@@ -4,7 +4,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const process: ImportMetaEnv = import.meta.env;
 
@@ -22,12 +22,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
-const userCollection = collection(db, "users");
-
 export {
-    userCollection,
-    addDoc,
     auth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    db,
+    doc,
+    setDoc,
 };
