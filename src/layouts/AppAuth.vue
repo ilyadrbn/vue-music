@@ -44,6 +44,7 @@
                         v-else
                         :validation-schema="signupValidationSchema"
                     />
+                    <AuthGoogleServices />
                 </div>
             </div>
         </div>
@@ -63,6 +64,7 @@ import {
 import AuthTabs from "./auth/components/AuthTabs.vue";
 import AuthLoginForm from "./auth/layouts/AuthLoginForm.vue";
 import AuthRegisterForm from "./auth/layouts/AuthRegisterForm.vue";
+import AuthGoogleServices from "./auth/layouts/AuthGoogleServices.vue";
 
 export default defineComponent({
     name: "AppAuth",
@@ -70,6 +72,7 @@ export default defineComponent({
         AuthTabs,
         AuthLoginForm,
         AuthRegisterForm,
+        AuthGoogleServices,
     },
     data() {
         return {

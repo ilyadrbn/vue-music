@@ -3,6 +3,8 @@ import {
     auth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    googleProvider,
+    signInWithPopup,
     db,
     doc,
     setDoc,
@@ -46,6 +48,19 @@ const useUserStore = defineStore("userStore", {
                 values.email,
                 values.password,
             );
+            this.userLoggedIn = true;
+        },
+
+        async googleAuth() {
+            Promise.all([
+                await signInWithPopup(auth, googleProvider),
+                await setDoc(doc(db, "users", auth.currentUser!.uid), {
+                    name: auth.currentUser!.displayName || "Guest",
+                    email: auth.currentUser!.email,
+                    age: 18,
+                    country: null,
+                }),
+            ]);
             this.userLoggedIn = true;
         },
     },
