@@ -103,17 +103,30 @@ export default defineComponent({
             console.log(auth);
             this.popupStore.isLoaderOpen = true;
             try {
-                await createUserWithEmailAndPassword(
-                    auth,
-                    values.email,
-                    values.password,
-                );
-                await addDoc(userCollection, {
-                    name: values.name,
-                    email: values.email,
-                    age: values.age,
-                    country: values.country || null,
-                });
+                Promise.all([
+                    await createUserWithEmailAndPassword(
+                        auth,
+                        values.email,
+                        values.password,
+                    ),
+                    await addDoc(userCollection, {
+                        name: values.name,
+                        email: values.email,
+                        age: values.age,
+                        country: values.country || null,
+                    }),
+                ]);
+                // await createUserWithEmailAndPassword(
+                //     auth,
+                //     values.email,
+                //     values.password,
+                // );
+                // await addDoc(userCollection, {
+                //     name: values.name,
+                //     email: values.email,
+                //     age: values.age,
+                //     country: values.country || null,
+                // });
                 this.popupStore.msgInfo = {
                     title: "Success",
                     text: "Registration successful!",
