@@ -52,27 +52,23 @@ export default defineComponent({
             try {
                 await this.userStore.loginUser(values);
 
-                this.popupStore.msgInfo = {
-                    title: "Success",
-                    text: "Logged in successfully",
-                    type: "Success",
-                };
+                this.popupStore.showMessage(
+                    "Success",
+                    "Logged in successfully.",
+                    "Success",
+                );
                 this.popupStore.isModalOpen = false;
             } catch (error) {
                 if (error instanceof Error) {
                     console.error(error);
                 }
-                this.popupStore.msgInfo = {
-                    title: "Error",
-                    text: "Login failed. Please try again.",
-                    type: "Error",
-                };
+                this.popupStore.showMessage(
+                    "Error",
+                    "Login failed. Please try again.",
+                    "Error",
+                );
             } finally {
                 this.popupStore.isLoaderOpen = false;
-                this.popupStore.isMsgInfoOpen = true;
-                setTimeout(() => {
-                    this.popupStore.isMsgInfoOpen = false;
-                }, 3000);
             }
         },
     },

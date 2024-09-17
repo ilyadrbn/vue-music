@@ -6,7 +6,7 @@ import { useUserStore } from "@/stores/user-store";
 const route = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
-    linkExactActiveClass: "text-yellow-500",
+    linkExactActiveClass: "text-yellow-500", // additional class for active link
 });
 
 route.beforeEach((to, from, next) => {

@@ -7,6 +7,7 @@ import {
     signInWithPopup,
 } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const process: ImportMetaEnv = import.meta.env;
 
@@ -26,7 +27,10 @@ const db = getFirestore(app);
 
 const googleProvider = new GoogleAuthProvider();
 
+const storage = getStorage();
+
 export {
+    firebaseConfig,
     auth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -35,4 +39,7 @@ export {
     db,
     doc,
     setDoc,
+    storage,
+    ref,
+    uploadBytes,
 };

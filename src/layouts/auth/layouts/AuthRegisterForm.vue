@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { usePopupStore, type IMsgInfo } from "@/stores/popup-store";
+import { usePopupStore } from "@/stores/popup-store";
 import { useUserStore } from "@/stores/user-store";
 import type { ISignupFormData } from "@/interfaces/auth-interfaces";
 
@@ -100,27 +100,23 @@ export default defineComponent({
             try {
                 await this.userStore.createUser(values);
 
-                this.popupStore.msgInfo = {
-                    title: "Success",
-                    text: "Registration successful!",
-                    type: "Success",
-                } as IMsgInfo;
+                this.popupStore.showMessage(
+                    "Success",
+                    "Registered successfully.",
+                    "Success",
+                );
                 this.popupStore.isModalOpen = false;
             } catch (error: unknown) {
                 if (error instanceof Error) {
                     console.error(error);
                 }
-                this.popupStore.msgInfo = {
-                    title: "Error",
-                    text: "Registration failed. Please try again.",
-                    type: "Error",
-                } as IMsgInfo;
+                this.popupStore.showMessage(
+                    "Error",
+                    "Registration failed. Please try again.",
+                    "Error",
+                );
             } finally {
                 this.popupStore.isLoaderOpen = false;
-                this.popupStore.isMsgInfoOpen = true;
-                setTimeout(() => {
-                    this.popupStore.isMsgInfoOpen = false;
-                }, 3000);
             }
         },
     },

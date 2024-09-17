@@ -29,7 +29,18 @@ const usePopupStore = defineStore("popupStore", {
         hiddenClass(popupNameStatus: boolean): string {
             return !popupNameStatus ? "hidden" : "";
         },
+        showMessage(title: string, text: string, type: string): void {
+            this.msgInfo = {
+                title: title,
+                text: text,
+                type: type,
+            };
+            this.isMsgInfoOpen = true;
+            setTimeout(() => {
+                this.isMsgInfoOpen = false;
+            }, 3000);
+        },
     },
 });
 
-export { usePopupStore, type IPopupStore, type IMsgInfo };
+export { usePopupStore, type IPopupStore };

@@ -25,26 +25,25 @@ export default defineComponent({
             try {
                 await this.userStore.googleAuth();
 
-                this.popupStore.msgInfo = {
-                    title: "Success",
-                    text: "Logged in successfully",
-                    type: "Success",
-                };
+                this.popupStore.showMessage(
+                    "Success",
+                    "Logged in successfully.",
+                    "Success",
+                );
                 this.popupStore.isModalOpen = false;
             } catch (error) {
                 if (error instanceof Error) {
                     console.error(error);
                 }
+                this.popupStore.showMessage(
+                    "Error",
+                    "Login failed. Please try again.",
+                    "Error",
+                );
             } finally {
                 this.popupStore.isLoaderOpen = false;
-                this.popupStore.isMsgInfoOpen = true;
-                setTimeout(() => {
-                    this.popupStore.isMsgInfoOpen = false;
-                }, 3000);
             }
         },
     },
 });
 </script>
-
-<style scoped></style>

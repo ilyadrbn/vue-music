@@ -5,7 +5,7 @@ import "@/assets/scss/main.scss";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { useUserStore } from "@/stores/user-store";
-import { auth } from "@/plugins/firebase-cfg";
+import { auth } from "@/plugins/firebase";
 import validation from "@/plugins/vee-validation";
 import router from "@/router";
 

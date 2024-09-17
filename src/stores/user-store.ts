@@ -8,7 +8,7 @@ import {
     db,
     doc,
     setDoc,
-} from "@/plugins/firebase-cfg";
+} from "@/plugins/firebase";
 import type {
     ISignupFormData,
     ISigninFormData,
