@@ -12,11 +12,15 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: "/manage-music",
+        alias: "/manage",
         name: "Manage",
         component: () => import("@/pages/ManagePage/AppManage.vue"),
+        meta: {
+            requiresAuth: true,
+        },
     },
     {
-        path: "/:catchAll(.*)*",
+        path: "/:pathMatch(.*)*",
         redirect: { name: "Home" },
     },
 ];

@@ -33,7 +33,7 @@
                             <a
                                 class="px-2 text-white"
                                 href="#"
-                                @click.prevent="userStore.signOut"
+                                @click.prevent="signOut"
                                 >Log Out</a
                             >
                         </li>
@@ -61,6 +61,12 @@ export default defineComponent({
         openAuthModal() {
             this.popupStore.$state.isModalOpen =
                 !this.popupStore.$state.isModalOpen;
+        },
+        signOut() {
+            this.userStore.signOut();
+            if (this.$route.meta.requiresAuth) {
+                this.$router.push({ name: "Home" });
+            }
         },
     },
 });

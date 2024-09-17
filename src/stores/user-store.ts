@@ -67,7 +67,6 @@ const useUserStore = defineStore("userStore", {
         async signOut(): Promise<void> {
             await auth.signOut();
             this.userLoggedIn = false;
-            window.location.reload();
         },
     },
 });

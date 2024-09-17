@@ -4,6 +4,8 @@ import "@/assets/scss/main.scss";
 // ? plugins
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import { useUserStore } from "@/stores/user-store";
+import { auth } from "@/plugins/firebase-cfg";
 import validation from "@/plugins/vee-validation";
 import router from "@/router";
 
@@ -15,5 +17,17 @@ const pinia = createPinia();
 const app = createApp(App);
 
 // ? using
-app.use(router).use(pinia).use(validation);
-app.mount("#app");
+app.use(pinia).use(validation);
+
+auth.authStateReady()
+    .then(() => {
+        if (auth.currentUser) {
+            useUserStore().userLoggedIn = true;
+        } else {
+            useUserStore().userLoggedIn = false;
+        }
+    })
+    .finally(() => {
+        app.use(router); // ? router must have access to the pinia state
+        app.mount("#app");
+    });
