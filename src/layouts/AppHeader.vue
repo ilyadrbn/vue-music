@@ -1,12 +1,13 @@
 <template>
     <header id="header" class="bg-gray-700">
-        <nav
-            class="container mx-auto flex items-center justify-start px-4 py-5"
-        >
+        <nav class="container mx-6 flex items-center justify-start px-4 py-5">
             <!-- App Name -->
-            <a class="mr-4 text-2xl font-bold uppercase text-white" href="#"
-                >Music</a
+            <router-link
+                :to="{ path: 'Home' }"
+                class="mr-4 text-2xl font-bold uppercase text-white"
             >
+                Music
+            </router-link>
 
             <div class="flex flex-grow items-center">
                 <!-- Primary Navigation -->
@@ -22,7 +23,11 @@
                     </li>
                     <template v-else>
                         <li>
-                            <a class="px-2 text-white" href="#">Manage</a>
+                            <router-link
+                                :to="{ name: 'Manage' }"
+                                class="px-2 text-white"
+                                >Manage</router-link
+                            >
                         </li>
                         <li>
                             <a
