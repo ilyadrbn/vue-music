@@ -27,7 +27,7 @@ import {
 
 export default defineComponent({
     name: "UploadDropbox",
-    emits: ["upload-progress", "upload-failed"],
+    emits: ["upload-progress", "upload-failed", "upload-success"],
     data() {
         return {
             popupStore: usePopupStore(),
@@ -63,11 +63,6 @@ export default defineComponent({
                             100;
                         this.uploadResources[file.name] = this.uploadProgress;
                         this.$emit("upload-progress", this.uploadResources);
-                        this.popupStore.showMessage(
-                            "Success",
-                            "Song uploaded successfully",
-                            "Success",
-                        );
                     },
                     (error) => {
                         this.$emit("upload-failed");
@@ -77,6 +72,14 @@ export default defineComponent({
                             "Error",
                         );
                         return;
+                    },
+                    () => {
+                        this.$emit("upload-success");
+                        this.popupStore.showMessage(
+                            "Success",
+                            "Song uploaded successfully",
+                            "Success",
+                        );
                     },
                 );
             });

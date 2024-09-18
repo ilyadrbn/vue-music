@@ -13,6 +13,7 @@
                 <UploadDropbox
                     @upload-progress="getProgressStatus"
                     @upload-failed="isFailed = true"
+                    @upload-success="isSuccess = true"
                 />
                 <hr class="my-6" />
                 <template v-for="(val, key) in filesProgress" :key="key">
@@ -23,6 +24,7 @@
                             progress: Number(val),
                         }"
                         :is-failed="isFailed"
+                        :is-success="isSuccess"
                     />
                 </template>
             </div>
@@ -46,6 +48,7 @@ export default defineComponent({
         return {
             filesProgress: {} as { [key: string]: number },
             isFailed: false,
+            isSuccess: false,
         };
     },
     methods: {

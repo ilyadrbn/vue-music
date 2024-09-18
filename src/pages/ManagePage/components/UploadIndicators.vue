@@ -9,6 +9,7 @@
                     'animate-none bg-blue-600 transition-none':
                         fileInfo.progress === 100,
                     'bg-red-600': isFailed,
+                    'bg-green-600': isSuccess,
                 }"
             ></div>
         </div>
@@ -29,6 +30,10 @@ export default defineComponent({
             required: true,
         },
         isFailed: {
+            type: Boolean,
+            default: false,
+        },
+        isSuccess: {
             type: Boolean,
             default: false,
         },
