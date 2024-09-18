@@ -19,11 +19,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { usePopupStore } from "@/stores/popup-store";
+import { auth, db } from "@/plugins/firebase";
 import {
     storage,
     ref as storageRef,
     uploadBytesResumable,
+    getDownloadURL,
 } from "@/plugins/firebase";
+import { type SongMeta } from "../manage";
+import { doc, setDoc } from "firebase/firestore";
 
 export default defineComponent({
     name: "UploadDropbox",
@@ -73,7 +77,26 @@ export default defineComponent({
                         );
                         return;
                     },
-                    () => {
+                    async () => {
+                        const songMeta: SongMeta = {
+                            uid: auth.currentUser!.uid,
+                            name: file.name,
+                            genre: "",
+                            countOfComment: 0,
+                            fileUrl: "",
+                        };
+
+                        await getDownloadURL(uploadTask.snapshot.ref).then(
+                            (downloadURL) => {
+                                songMeta.fileUrl = downloadURL;
+                            },
+                        );
+
+                        await setDoc(
+                            doc(db, "songs", auth.currentUser!.uid),
+                            songMeta,
+                        );
+
                         this.$emit("upload-success");
                         this.popupStore.showMessage(
                             "Success",

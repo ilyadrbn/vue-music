@@ -7,7 +7,12 @@ import {
     signInWithPopup,
 } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import {
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+} from "firebase/storage";
 
 const process: ImportMetaEnv = import.meta.env;
 
@@ -42,4 +47,5 @@ export {
     storage,
     ref,
     uploadBytesResumable,
+    getDownloadURL,
 };
