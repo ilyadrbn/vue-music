@@ -10,10 +10,11 @@
                 ></i>
             </div>
             <div class="p-6">
-                <!-- Upload Dropbox -->
-                <UploadDropbox @upload-progress="getProgressStatus" />
+                <UploadDropbox
+                    @upload-progress="getProgressStatus"
+                    @upload-failed="isFailed = true"
+                />
                 <hr class="my-6" />
-                <!-- Progess Bars -->
                 <template v-for="(val, key) in filesProgress" :key="key">
                     <UploadIndicators
                         v-if="filesProgress"
@@ -21,6 +22,7 @@
                             name: String(key),
                             progress: Number(val),
                         }"
+                        :is-failed="isFailed"
                     />
                 </template>
             </div>
@@ -43,6 +45,7 @@ export default defineComponent({
     data() {
         return {
             filesProgress: {} as { [key: string]: number },
+            isFailed: false,
         };
     },
     methods: {

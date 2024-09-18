@@ -1,12 +1,15 @@
 <template>
     <div class="mb-4">
-        <!-- File Name -->
         <div class="text-sm font-bold">{{ fileInfo.name }}</div>
         <div class="flex h-4 overflow-hidden rounded bg-gray-200">
-            <!-- Inner Progress Bar -->
             <div
                 class="progress-bar bg-blue-400 transition-all"
                 :style="{ width: fileInfo.progress + '%' }"
+                :class="{
+                    'animate-none bg-blue-600 transition-none':
+                        fileInfo.progress === 100,
+                    'bg-red-600': isFailed,
+                }"
             ></div>
         </div>
     </div>
@@ -24,6 +27,10 @@ export default defineComponent({
                 progress: number;
             },
             required: true,
+        },
+        isFailed: {
+            type: Boolean,
+            default: false,
         },
     },
 });
