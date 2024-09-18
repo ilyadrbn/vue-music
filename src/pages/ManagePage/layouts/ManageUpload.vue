@@ -11,10 +11,18 @@
             </div>
             <div class="p-6">
                 <!-- Upload Dropbox -->
-                <UploadDropbox />
+                <UploadDropbox @upload-progress="getProgressStatus" />
                 <hr class="my-6" />
                 <!-- Progess Bars -->
-                <UploadIndicators />
+                <template v-for="(val, key) in filesProgress" :key="key">
+                    <UploadIndicators
+                        v-if="filesProgress"
+                        :file-info="{
+                            name: String(key),
+                            progress: Number(val),
+                        }"
+                    />
+                </template>
             </div>
         </div>
     </div>
@@ -31,6 +39,16 @@ export default defineComponent({
     components: {
         UploadDropbox,
         UploadIndicators,
+    },
+    data() {
+        return {
+            filesProgress: {} as { [key: string]: number },
+        };
+    },
+    methods: {
+        getProgressStatus(progress: { [key: string]: number }): void {
+            this.filesProgress = { ...progress };
+        },
     },
 });
 </script>
