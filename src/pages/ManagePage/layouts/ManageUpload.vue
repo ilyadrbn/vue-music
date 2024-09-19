@@ -44,7 +44,6 @@ export default defineComponent({
         UploadDropbox,
         UploadIndicators,
     },
-    emits: ["getUploadedFiles"],
     data() {
         return {
             filesProgress: {} as { [key: string]: number },
@@ -55,9 +54,6 @@ export default defineComponent({
     methods: {
         getProgressStatus(progress: { [key: string]: number }): void {
             this.filesProgress = { ...progress };
-            if (this.isSuccess) {
-                this.$emit("getUploadedFiles", this.filesProgress);
-            }
         },
     },
 });

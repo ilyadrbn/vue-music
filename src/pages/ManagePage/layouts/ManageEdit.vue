@@ -10,8 +10,11 @@
                 ></i>
             </div>
             <div class="p-6">
-                <!-- Composition Items -->
-                <EditBlock />
+                <EditBlock
+                    v-for="file in fileList"
+                    :key="file.id"
+                    :file-info="file"
+                />
             </div>
         </div>
     </div>
@@ -20,11 +23,39 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import EditBlock from "../components/EditBlock.vue";
+import {
+    db,
+    collection,
+    onSnapshot,
+    auth,
+    query,
+    where,
+} from "@/plugins/firebase";
 
 export default defineComponent({
     name: "ManageEdit",
     components: {
         EditBlock,
+    },
+    data() {
+        return {
+            fileList: [] as {
+                id: string;
+            }[],
+        };
+    },
+    async created() {
+        // ? https://firebase.google.com/docs/firestore/query-data/listen?hl=ru&authuser=0#listen_to_multiple_documents_in_a_collection
+        const q = await query(
+            collection(db, "songs"),
+            where("uid", "==", auth.currentUser?.uid),
+        );
+        await onSnapshot(q, (doc) => {
+            this.fileList = doc.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+        });
     },
 });
 </script>

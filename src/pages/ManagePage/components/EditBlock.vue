@@ -1,7 +1,7 @@
 <template>
     <div class="mb-4 rounded border border-gray-200 p-3">
         <div>
-            <h4 class="inline-block text-2xl font-bold">Song Name</h4>
+            <h4 class="inline-block text-2xl font-bold">{{ fileInfo.name }}</h4>
             <button
                 class="float-right ml-1 rounded bg-red-600 px-2 py-1 text-sm text-white"
             >
@@ -53,6 +53,12 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
     name: "EditBlock",
+    props: {
+        fileInfo: {
+            type: Object,
+            required: true,
+        },
+    },
 });
 </script>
 
