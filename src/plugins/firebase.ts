@@ -6,7 +6,7 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, collection, setDoc, addDoc } from "firebase/firestore";
 import {
     getStorage,
     ref,
@@ -43,7 +43,9 @@ export {
     signInWithPopup,
     db,
     doc,
+    collection,
     setDoc,
+    addDoc,
     storage,
     ref,
     uploadBytesResumable,

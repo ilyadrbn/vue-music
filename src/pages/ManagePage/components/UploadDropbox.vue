@@ -14,6 +14,7 @@
     >
         <h5>Drop your files here</h5>
     </div>
+    <input type="file" multiple @change="uploadFile($event)" />
 </template>
 
 <script lang="ts">
@@ -21,13 +22,14 @@ import { defineComponent } from "vue";
 import { usePopupStore } from "@/stores/popup-store";
 import { auth, db } from "@/plugins/firebase";
 import {
+    collection,
+    addDoc,
     storage,
     ref as storageRef,
     uploadBytesResumable,
     getDownloadURL,
 } from "@/plugins/firebase";
 import { type SongMeta } from "../manage";
-import { doc, setDoc } from "firebase/firestore";
 
 export default defineComponent({
     name: "UploadDropbox",
@@ -36,15 +38,22 @@ export default defineComponent({
         return {
             popupStore: usePopupStore(),
             isDragover: false as boolean,
-            uploadProgress: 0 as number,
             uploadResources: {} as { [key: string]: number },
         };
     },
+    unmounted(): void {
+        console.log(this);
+    },
     methods: {
-        uploadFile($event: DragEvent): void {
+        uploadFile($event: DragEvent | Event): void {
             this.isDragover = false;
 
-            const files: File[] = [...$event.dataTransfer!.files];
+            const files =
+                $event instanceof DragEvent
+                    ? [...$event.dataTransfer!.files]
+                    : Array.from(
+                          ($event.target as HTMLInputElement)?.files ?? [],
+                      );
 
             files.forEach((file: File): void => {
                 if (file.type !== "audio/mpeg") {
@@ -62,10 +71,12 @@ export default defineComponent({
                 uploadTask.on(
                     "state_changed",
                     (snapshot) => {
-                        this.uploadProgress =
+                        const uploadProgress =
                             (snapshot.bytesTransferred / snapshot.totalBytes) *
                             100;
-                        this.uploadResources[file.name] = this.uploadProgress;
+
+                        this.uploadResources[file.name] = uploadProgress;
+
                         this.$emit("upload-progress", this.uploadResources);
                     },
                     (error) => {
@@ -92,10 +103,7 @@ export default defineComponent({
                             },
                         );
 
-                        await setDoc(
-                            doc(db, "songs", auth.currentUser!.uid),
-                            songMeta,
-                        );
+                        await addDoc(collection(db, "songs"), songMeta);
 
                         this.$emit("upload-success");
                         this.popupStore.showMessage(
