@@ -9,29 +9,14 @@
             </button>
             <button
                 class="float-right ml-1 rounded bg-blue-600 px-2 py-1 text-sm text-white"
+                @click.prevent="isHidden = !isHidden"
             >
                 <i class="fa fa-pencil-alt"></i>
             </button>
         </div>
-        <div>
-            <form>
-                <div class="mb-3">
-                    <label class="mb-2 inline-block">Song Title</label>
-                    <input
-                        type="text"
-                        class="block w-full rounded border border-gray-300 px-3 py-1.5 text-gray-800 transition duration-500 focus:border-black focus:outline-none"
-                        placeholder="Enter Song Title"
-                    />
-                </div>
-                <div class="mb-3">
-                    <label class="mb-2 inline-block">Genre</label>
-                    <input
-                        type="text"
-                        class="block w-full rounded border border-gray-300 px-3 py-1.5 text-gray-800 transition duration-500 focus:border-black focus:outline-none"
-                        placeholder="Enter Genre"
-                    />
-                </div>
-                <button
+        <div v-show="!isHidden">
+            <ManageEditForm :validation-schema="manageValidationSchema" />
+            <!-- <button
                     type="submit"
                     class="rounded bg-green-600 px-3 py-1.5 text-white"
                 >
@@ -42,24 +27,33 @@
                     class="rounded bg-gray-600 px-3 py-1.5 text-white"
                 >
                     Go Back
-                </button>
-            </form>
+                </button> -->
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { ManageValidationSchema } from "../validation-schemas";
+
+import ManageEditForm from "../components/EditForm.vue";
 
 export default defineComponent({
     name: "EditBlock",
+    components: {
+        ManageEditForm,
+    },
     props: {
         fileInfo: {
             type: Object,
             required: true,
         },
     },
+    data() {
+        return {
+            isHidden: true as boolean,
+            manageValidationSchema: new ManageValidationSchema(),
+        };
+    },
 });
 </script>
-
-<style scoped></style>

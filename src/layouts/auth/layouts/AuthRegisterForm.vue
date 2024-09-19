@@ -64,7 +64,7 @@ import { useUserStore } from "@/stores/user-store";
 import type { ISignupFormData } from "@/interfaces/auth-interfaces";
 
 import AuthForm from "@/components/AppForm.vue";
-import AuthInput from "../components/AuthInput.vue";
+import AuthInput from "../../../components/AppInput.vue";
 import AuthSelect from "../components/AuthSelect.vue";
 import AuthCheckbox from "../components/AuthCheckbox.vue";
 import AuthBtn from "@/components/AppBtn.vue";

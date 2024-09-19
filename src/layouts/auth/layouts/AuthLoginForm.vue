@@ -30,7 +30,7 @@ import { useUserStore } from "@/stores/user-store";
 import type { ISigninFormData } from "@/interfaces/auth-interfaces";
 
 import AuthForm from "@/components/AppForm.vue";
-import AuthInput from "../components/AuthInput.vue";
+import AuthInput from "../../../components/AppInput.vue";
 import AuthBtn from "@/components/AppBtn.vue";
 
 export default defineComponent({

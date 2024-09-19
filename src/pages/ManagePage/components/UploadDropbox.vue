@@ -29,7 +29,7 @@ import {
     uploadBytesResumable,
     getDownloadURL,
 } from "@/plugins/firebase";
-import { type SongMeta } from "../manage";
+import { type SongMeta } from "@/interfaces/manage-interfaces";
 
 export default defineComponent({
     name: "UploadDropbox",

@@ -56,9 +56,10 @@ export default {
                 ]
                     ? messages[ctx.rule?.name as keyof typeof messages]
                     : `Field ${ctx.field} is not valid`;
+                    console.log(message);
                 return message;
             },
-            validateOnBlur: false,
+            validateOnBlur: true,
             validateOnChange: true,
             validateOnInput: false,
             validateOnModelUpdate: true,
