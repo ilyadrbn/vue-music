@@ -1,7 +1,7 @@
 <template>
     <vee-form>
         <VeeInput
-            name="title"
+            name="song-title"
             type="text"
             placeholder="Enter Title"
             label="Song Title"

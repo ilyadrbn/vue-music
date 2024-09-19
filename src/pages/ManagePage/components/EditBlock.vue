@@ -36,7 +36,7 @@
 import { defineComponent } from "vue";
 import { ManageValidationSchema } from "../validation-schemas";
 
-import ManageEditForm from "../components/EditForm.vue";
+import ManageEditForm from "./EditForm.vue";
 
 export default defineComponent({
     name: "EditBlock",
