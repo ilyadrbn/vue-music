@@ -8,6 +8,7 @@ type SongMeta = {
 
 interface IManageRules {
     required: boolean;
+    alpha_spaces?: boolean;
 }
 
 interface IManageValidationSchema {

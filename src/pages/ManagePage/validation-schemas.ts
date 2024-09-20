@@ -9,6 +9,7 @@ class ManageValidationSchema implements IManageValidationSchema {
     };
     readonly genre: IManageRules = {
         required: false,
+        alpha_spaces: true,
     };
 }
 
