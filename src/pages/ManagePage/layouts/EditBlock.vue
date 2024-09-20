@@ -15,7 +15,7 @@
             </button>
         </div>
         <div v-show="!isHidden">
-            <ManageEditForm :validation-schema="manageValidationSchema" />
+            <ManageEditForm :validation-schema="manageValidationSchema" :file-info="fileInfo.id"/>
             <!-- <button
                     type="submit"
                     class="rounded bg-green-600 px-3 py-1.5 text-white"

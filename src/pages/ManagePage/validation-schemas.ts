@@ -4,11 +4,11 @@ import type {
 } from "@/interfaces/manage-interfaces";
 
 class ManageValidationSchema implements IManageValidationSchema {
-    readonly name: IManageRules = {
+    readonly edited_name: IManageRules = {
+        required: true,
+    };
+    readonly genre: IManageRules = {
         required: false,
-        min: 3,
-        max: 20,
-        alpha_spaces: true,
     };
 }
 

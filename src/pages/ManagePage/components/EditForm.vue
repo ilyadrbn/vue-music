@@ -1,45 +1,54 @@
 <template>
-    <vee-form>
-        <VeeInput
-            name="title"
+    <edit-form @submit="edit">
+        <EditInput
+            name="edited_name"
             type="text"
             placeholder="Enter Title"
             label="Song Title"
             :bails="false"
         />
-        <VeeInput
+        <EditInput
             name="genre"
             type="text"
             placeholder="Enter Genre"
             label="Genre"
             :bails="false"
         />
-        <button
-            type="submit"
-            class="rounded bg-green-600 px-3 py-1.5 text-white"
-        >
-            Submit
-        </button>
-        <button
+        <edit-btn type="submit" class="mb-2 w-1/4"> Submit </edit-btn>
+        <edit-btn
             type="button"
-            class="rounded bg-gray-600 px-3 py-1.5 text-white"
+            class="w-1/4 bg-slate-700 hover:bg-slate-500"
+            @click.prevent
         >
-            Go Back
-        </button>
-    </vee-form>
+            Go back
+        </edit-btn>
+    </edit-form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import VeeForm from "@/components/AppForm.vue";
-import VeeInput from "@/components/AppInput.vue";
+import EditForm from "@/components/AppForm.vue";
+import EditInput from "@/components/AppInput.vue";
+import EditBtn from "@/components/AppBtn.vue";
 
 export default defineComponent({
     name: "EditForm1",
     components: {
-        VeeForm,
-        VeeInput,
+        EditForm,
+        EditInput,
+        EditBtn,
+    },
+    props: {
+        fileInfo: {
+            type: String,
+            required: true,
+        },
+    },
+    methods: {
+        edit(): void {
+            console.log("submitted");
+        },
     },
 });
 </script>

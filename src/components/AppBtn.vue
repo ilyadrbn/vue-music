@@ -14,7 +14,7 @@ export default defineComponent({
     name: "AppAuthBtn",
     props: {
         type: {
-            type: String as () => "submit",
+            type: String as () => "submit" | "button",
             required: true,
         },
     },

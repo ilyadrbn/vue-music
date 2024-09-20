@@ -7,14 +7,11 @@ type SongMeta = {
 };
 
 interface IManageRules {
-    required?: boolean;
-    min?: number;
-    max?: number;
-    alpha_spaces?: boolean;
+    required: boolean;
 }
 
 interface IManageValidationSchema {
-    readonly name: IManageRules;
+    readonly edited_name: IManageRules;
 }
 
 export type { SongMeta, IManageRules, IManageValidationSchema };
