@@ -1,7 +1,13 @@
 <template>
+<<<<<<< HEAD
     <edit-form @submit="edit">
         <EditInput
             name="edited_name"
+=======
+    <vee-form>
+        <VeeInput
+            name="song-title"
+>>>>>>> 29b03ce724c6f5877598a474dccc56689a0653ba
             type="text"
             placeholder="Enter Title"
             label="Song Title"

@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import EditBlock from "./EditBlock.vue";
+import EditBlock from "../components/EditBlock.vue";
 import {
     db,
     collection,

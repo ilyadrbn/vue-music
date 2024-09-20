@@ -4,6 +4,10 @@
             labelText
         }}</label>
         <vee-field v-slot="{ field, errors }" :name="name" :bails="bails">
+<<<<<<< HEAD
+=======
+            {{ field }} {{ errors }} {{ name }}
+>>>>>>> 29b03ce724c6f5877598a474dccc56689a0653ba
             <input
                 :id="name"
                 class="'block focus:outline-none' w-full rounded border border-gray-300 px-3 py-1.5 text-gray-800 transition duration-500 focus:border-black"
