@@ -13,6 +13,7 @@ interface IManageRules {
 
 interface IManageValidationSchema {
     readonly edited_name: IManageRules;
+    readonly genre: IManageRules;
 }
 
 export type { SongMeta, IManageRules, IManageValidationSchema };

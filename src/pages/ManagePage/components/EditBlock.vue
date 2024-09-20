@@ -4,6 +4,7 @@
             <h4 class="inline-block text-2xl font-bold">{{ fileInfo.name }}</h4>
             <button
                 class="float-right ml-1 rounded bg-red-600 px-2 py-1 text-sm text-white"
+                @click.prevent="remove"
             >
                 <i class="fa fa-times"></i>
             </button>
@@ -15,19 +16,11 @@
             </button>
         </div>
         <div v-show="!isHidden">
-            <ManageEditForm :validation-schema="manageValidationSchema" :file-info="fileInfo.id"/>
-            <!-- <button
-                    type="submit"
-                    class="rounded bg-green-600 px-3 py-1.5 text-white"
-                >
-                    Submit
-                </button>
-                <button
-                    type="button"
-                    class="rounded bg-gray-600 px-3 py-1.5 text-white"
-                >
-                    Go Back
-                </button> -->
+            <EditForm
+                :validation-schema="manageValidationSchema"
+                :file-info="fileInfo"
+                @close-form="isHidden = true"
+            />
         </div>
     </div>
 </template>
@@ -35,13 +28,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { ManageValidationSchema } from "../validation-schemas";
+import { db, deleteDoc, doc } from "@/plugins/firebase";
+import { usePopupStore } from "@/stores/popup-store";
 
-import ManageEditForm from "./EditForm.vue";
+import EditForm from "./EditForm.vue";
 
 export default defineComponent({
     name: "EditBlock",
     components: {
-        ManageEditForm,
+        EditForm,
     },
     props: {
         fileInfo: {
@@ -52,8 +47,32 @@ export default defineComponent({
     data() {
         return {
             isHidden: true as boolean,
+            popupStore: usePopupStore(),
             manageValidationSchema: new ManageValidationSchema(),
         };
+    },
+    methods: {
+        async remove() {
+            this.popupStore.isLoaderOpen = true;
+            try {
+                await deleteDoc(doc(db, "songs", this.fileInfo.id));
+                this.popupStore.showMessage(
+                    "Success",
+                    "Remove successfully.",
+                    "Success",
+                );
+            } catch (error) {
+                if (error instanceof Error) {
+                    this.popupStore.showMessage(
+                        "Error",
+                        error.message,
+                        "Error",
+                    );
+                }
+            } finally {
+                this.popupStore.isLoaderOpen = false;
+            }
+        },
     },
 });
 </script>
