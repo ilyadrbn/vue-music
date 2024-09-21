@@ -21,16 +21,14 @@
 import { defineComponent } from "vue";
 
 /* *--------------------- plugins ------------------------ */
+import { auth } from "@/plugins/firebase-auth";
+import { addDoc, songsCollection } from "@/plugins/firebase-firestore";
 import {
-    auth,
-    db,
-    collection,
-    addDoc,
     storage,
     ref as storageRef,
     uploadBytesResumable,
     getDownloadURL,
-} from "@/plugins/firebase";
+} from "@/plugins/firebase-storage";
 
 /* *--------------------- stores ------------------------ */
 import { usePopupStore } from "@/stores/popup-store";
@@ -47,9 +45,6 @@ export default defineComponent({
             isDragover: false as boolean,
             uploadResources: {} as { [key: string]: number },
         };
-    },
-    unmounted(): void {
-        console.log(this);
     },
     methods: {
         uploadFile($event: DragEvent | Event): void {
@@ -110,7 +105,7 @@ export default defineComponent({
                             },
                         );
 
-                        await addDoc(collection(db, "songs"), songMeta);
+                        await addDoc(songsCollection, songMeta);
 
                         this.$emit("upload-success");
                         this.popupStore.showMessage(

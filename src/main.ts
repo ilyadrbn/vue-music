@@ -1,12 +1,18 @@
 // ? styles
 import "@/assets/scss/main.scss";
 
-// ? plugins
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import { useUserStore } from "@/stores/user-store";
-import { auth } from "@/plugins/firebase";
+
+// ? plugins
+import "@/plugins/firebase";
+import { auth } from "@/plugins/firebase-auth";
 import validation from "@/plugins/vee-validation";
+
+// ? stores
+import { useUserStore } from "@/stores/user-store";
+
+// ? router
 import router from "@/router";
 
 // ? components
@@ -16,7 +22,6 @@ import App from "./App.vue";
 const pinia = createPinia();
 const app = createApp(App);
 
-// ? using
 app.use(pinia).use(validation);
 
 auth.authStateReady()

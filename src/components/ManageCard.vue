@@ -29,7 +29,7 @@
 import { defineComponent } from "vue";
 
 /* *--------------------- plugins ------------------------ */
-import { db, deleteDoc, doc } from "@/plugins/firebase";
+import { db, doc, deleteDoc } from "@/plugins/firebase-firestore";
 
 /* *--------------------- stores ------------------------ */
 import { usePopupStore } from "@/stores/popup-store";

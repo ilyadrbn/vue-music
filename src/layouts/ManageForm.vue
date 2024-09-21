@@ -24,14 +24,13 @@
 import { defineComponent } from "vue";
 
 /* *--------------------- plugins ------------------------ */
+import { auth } from "@/plugins/firebase-auth";
 import {
-    auth,
-    db,
-    collection,
+    songsCollection,
     onSnapshot,
     query,
     where,
-} from "@/plugins/firebase";
+} from "@/plugins/firebase-firestore";
 
 /* *--------------------- components ------------------------ */
 import ManageCard from "@/components/ManageCard.vue";
@@ -51,7 +50,7 @@ export default defineComponent({
     async created() {
         // ? https://firebase.google.com/docs/firestore/query-data/listen?hl=ru&authuser=0#listen_to_multiple_documents_in_a_collection
         const q = await query(
-            collection(db, "songs"),
+            songsCollection,
             where("uid", "==", auth.currentUser?.uid),
         );
         await onSnapshot(q, (doc) => {

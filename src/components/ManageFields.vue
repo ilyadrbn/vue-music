@@ -35,7 +35,7 @@
 import { defineComponent } from "vue";
 
 /* *------------------- plugins ------------------------- */
-import { doc, db, updateDoc } from "@/plugins/firebase";
+import { db, doc, updateDoc } from "@/plugins/firebase-firestore";
 
 /* *--------------------- stores ------------------------ */
 import { usePopupStore } from "@/stores/popup-store";

@@ -12,8 +12,8 @@
 import { defineComponent } from "vue";
 
 /* *--------------------- components ------------------------ */
-import UploadForm from "../layouts/UploadForm.vue";
-import ManageForm from "../layouts/ManageForm.vue";
+import UploadForm from "@/layouts/UploadForm.vue";
+import ManageForm from "@/layouts/ManageForm.vue";
 
 export default defineComponent({
     name: "ManagePage",

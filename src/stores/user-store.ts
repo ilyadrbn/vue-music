@@ -5,12 +5,10 @@ import {
     auth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    googleProvider,
     signInWithPopup,
-    db,
-    doc,
-    setDoc,
-} from "@/plugins/firebase";
+    googleProvider,
+} from "@/plugins/firebase-auth";
+import { db, doc, setDoc } from "@/plugins/firebase-firestore";
 
 /* *--------------------- types ------------------------ */
 import type { ISignupFormData } from "@/types/signup-types";
