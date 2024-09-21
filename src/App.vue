@@ -10,11 +10,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import AppHeader from "@/layouts/AppHeader.vue";
-import AppPlayer from "@/layouts/AppPlayer.vue";
+import AppHeader from "@/layouts/TheHeader.vue";
+import AppPlayer from "@/layouts/ThePlayer.vue";
 import AppAuth from "@/layouts/AppAuth.vue";
-import AppLoader from "@/layouts/AppLoader.vue";
-import AppMsgInfo from "@/layouts/AppMsgInfo.vue";
+import AppLoader from "@/layouts/TheLoader.vue";
+import AppMsgInfo from "@/layouts/TheNotification.vue";
 
 export default defineComponent({
     name: "App",

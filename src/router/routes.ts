@@ -8,13 +8,13 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/",
         name: "Home",
-        component: () => import("@/pages/AppHome.vue"),
+        component: () => import("@/pages/PageHome.vue"),
     },
     {
         path: "/manage-music",
         alias: "/manage",
         name: "Manage",
-        component: () => import("@/pages/AppManage.vue"),
+        component: () => import("@/pages/PageManage.vue"),
         meta: {
             requiresAuth: true,
         },

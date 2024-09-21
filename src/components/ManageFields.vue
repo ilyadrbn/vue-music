@@ -33,22 +33,20 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { usePopupStore } from "@/stores/popup-store";
-import {
-    // auth,
-    doc,
-    db,
-    // collection,
-    // query,
-    // where,
-    // getDocs,
-    updateDoc,
-} from "@/plugins/firebase";
-import type { IManageValidationSchema } from "@/interfaces/manage-interfaces";
 
+/* *------------------- plugins ------------------------- */
+import { doc, db, updateDoc } from "@/plugins/firebase";
+
+/* *--------------------- stores ------------------------ */
+import { usePopupStore } from "@/stores/popup-store";
+
+/* *--------------------- types ------------------------ */
+import type { IManageValidationSchema } from "@/types/manage-types";
+
+/* *------------------- components -------------------- */
 import EditForm from "@/components/AppForm.vue";
 import EditInput from "@/components/AppInput.vue";
-import EditBtn from "@/components/AppBtn.vue";
+import EditBtn from "@/components/AppButton.vue";
 
 export default defineComponent({
     name: "EditForm1",

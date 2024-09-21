@@ -9,6 +9,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
+/* *--------------------- stores ------------------------ */
 import { useUserStore } from "@/stores/user-store";
 import { usePopupStore } from "@/stores/popup-store";
 

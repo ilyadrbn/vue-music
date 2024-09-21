@@ -16,7 +16,7 @@
             </button>
         </div>
         <div v-show="!isHidden">
-            <EditForm
+            <ManageFields
                 :validation-schema="manageValidationSchema"
                 :file-info="fileInfo"
                 @close-form="isHidden = true"
@@ -27,16 +27,23 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ManageValidationSchema } from "../validation-schemas";
+
+/* *--------------------- plugins ------------------------ */
 import { db, deleteDoc, doc } from "@/plugins/firebase";
+
+/* *--------------------- stores ------------------------ */
 import { usePopupStore } from "@/stores/popup-store";
 
-import EditForm from "./EditForm.vue";
+/* *--------------------- helpers ------------------------ */
+import { ManageValidationSchema } from "@/helpers/manage-validation-schemas";
+
+/* *--------------------- components ------------------------ */
+import ManageFields from "./ManageFields.vue";
 
 export default defineComponent({
     name: "EditBlock",
     components: {
-        EditForm,
+        ManageFields,
     },
     props: {
         fileInfo: {

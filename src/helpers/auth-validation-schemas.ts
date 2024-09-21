@@ -1,10 +1,13 @@
 import type {
     ISignupValidationSchema,
     ISignupRules,
+    ITermsOfServiceRule,
+} from "@/types/signup-types";
+
+import type {
     ISigninValidationSchema,
     ISigninRules,
-    ITermsOfService,
-} from "@/interfaces/auth-interfaces";
+} from "@/types/signin-types";
 
 class SignupValidationSchema implements ISignupValidationSchema {
     readonly name: ISignupRules = {
@@ -35,7 +38,7 @@ class SignupValidationSchema implements ISignupValidationSchema {
     readonly country?: ISignupRules = {
         required: false,
     };
-    readonly tos: ITermsOfService = {
+    readonly tos: ITermsOfServiceRule = {
         tos: true,
     };
 }

@@ -1,10 +1,10 @@
-type SongMeta = {
+interface ISongMeta {
     uid: string;
     name: string;
     genre: string;
     countOfComment: number;
     fileUrl: string;
-};
+}
 
 interface IManageRules {
     required: boolean;
@@ -16,4 +16,4 @@ interface IManageValidationSchema {
     readonly genre: IManageRules;
 }
 
-export type { SongMeta, IManageRules, IManageValidationSchema };
+export type { ISongMeta, IManageRules, IManageValidationSchema };

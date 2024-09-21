@@ -16,6 +16,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
+/* *--------------------- stores ------------------------ */
 import { usePopupStore } from "@/stores/popup-store";
 
 export default defineComponent({

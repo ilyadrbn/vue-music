@@ -13,8 +13,6 @@
                     @click.stop="closeAuthModal"
                 ></div>
             </div>
-
-            <!-- This element is to trick the browser into centering the modal contents. -->
             <span class="hidden sm:inline-block sm:h-screen sm:align-middle"
                 >&#8203;</span
             >
@@ -22,12 +20,9 @@
             <div
                 class="inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle"
             >
-                <!-- Add margin if you want to see some of the overlay behind the modal-->
                 <div class="px-6 py-4 text-left">
-                    <!--Title-->
                     <div class="flex items-center justify-between pb-4">
                         <p class="text-2xl font-bold">Your Account</p>
-                        <!-- Modal Close Button -->
                         <div
                             class="modal-close z-50 cursor-pointer"
                             @click.stop="closeAuthModal"
@@ -44,7 +39,7 @@
                         v-else
                         :validation-schema="signupValidationSchema"
                     />
-                    <AuthGoogleServices />
+                    <AuthGoogleButton />
                 </div>
             </div>
         </div>
@@ -52,27 +47,30 @@
 </template>
 
 <script lang="ts">
+/* *--------------------- plugins ------------------------ */
 import { defineComponent } from "vue";
 import { usePopupStore } from "@/stores/popup-store";
-import type { IAuthMethod } from "@/interfaces/auth-interfaces";
+import type { IAuthMethod } from "@/types/auth-types";
 
+/* *--------------------- helpers ------------------------ */
 import {
     SignupValidationSchema,
     SigninValidationSchema,
-} from "./auth/validation-schemas";
+} from "@/helpers/auth-validation-schemas";
 
-import AuthTabs from "./auth/components/AuthTabs.vue";
-import AuthLoginForm from "./auth/layouts/AuthLoginForm.vue";
-import AuthRegisterForm from "./auth/layouts/AuthRegisterForm.vue";
-import AuthGoogleServices from "./auth/layouts/AuthGoogleServices.vue";
+/* *--------------------- components ------------------------ */
+import AuthTabs from "@/components/AuthTabs.vue";
+import AuthGoogleButton from "@/components/AuthGoogleButton.vue";
+import AuthLoginForm from "./AuthLoginForm.vue";
+import AuthRegisterForm from "./AuthRegisterForm.vue";
 
 export default defineComponent({
     name: "AppAuth",
     components: {
         AuthTabs,
+        AuthGoogleButton,
         AuthLoginForm,
         AuthRegisterForm,
-        AuthGoogleServices,
     },
     data() {
         return {

@@ -25,13 +25,18 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
+/* *--------------------- stores ------------------------ */
 import { usePopupStore } from "@/stores/popup-store";
 import { useUserStore } from "@/stores/user-store";
-import type { ISigninFormData } from "@/interfaces/auth-interfaces";
 
+/* *--------------------- types ------------------------ */
+import type { ISigninFormData } from "@/types/signin-types";
+
+/* *--------------------- components ------------------------ */
 import AuthForm from "@/components/AppForm.vue";
-import AuthInput from "../../../components/AppInput.vue";
-import AuthBtn from "@/components/AppBtn.vue";
+import AuthInput from "@/components/AppInput.vue";
+import AuthBtn from "@/components/AppButton.vue";
 
 export default defineComponent({
     name: "AuthLoginForm",

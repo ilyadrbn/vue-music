@@ -19,9 +19,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { usePopupStore } from "@/stores/popup-store";
-import { auth, db } from "@/plugins/firebase";
+
+/* *--------------------- plugins ------------------------ */
 import {
+    auth,
+    db,
     collection,
     addDoc,
     storage,
@@ -29,7 +31,12 @@ import {
     uploadBytesResumable,
     getDownloadURL,
 } from "@/plugins/firebase";
-import { type SongMeta } from "@/interfaces/manage-interfaces";
+
+/* *--------------------- stores ------------------------ */
+import { usePopupStore } from "@/stores/popup-store";
+
+/* *--------------------- types ------------------------ */
+import type { ISongMeta } from "@/types/manage-types";
 
 export default defineComponent({
     name: "UploadDropbox",
@@ -66,8 +73,8 @@ export default defineComponent({
                 }
                 const fileRef = storageRef(storage, `songs/${file.name}`);
                 const uploadTask = uploadBytesResumable(fileRef, file);
-                // ? https://firebase.google.com/docs/storage/web/upload-files?hl=ru&authuser=0#monitor_upload_progress
 
+                // ? https://firebase.google.com/docs/storage/web/upload-files?hl=ru&authuser=0#monitor_upload_progress
                 uploadTask.on(
                     "state_changed",
                     (snapshot) => {
@@ -89,7 +96,7 @@ export default defineComponent({
                         return;
                     },
                     async () => {
-                        const songMeta: SongMeta = {
+                        const songMeta: ISongMeta = {
                             uid: auth.currentUser!.uid,
                             name: file.name.replace(/\.[^/.]+$/, ""),
                             genre: "",

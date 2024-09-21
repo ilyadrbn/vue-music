@@ -10,7 +10,7 @@
                 ></i>
             </div>
             <div class="p-6">
-                <EditBlock
+                <ManageCard
                     v-for="file in fileList"
                     :key="file.id"
                     :file-info="file"
@@ -22,20 +22,24 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import EditBlock from "../components/EditBlock.vue";
+
+/* *--------------------- plugins ------------------------ */
 import {
+    auth,
     db,
     collection,
     onSnapshot,
-    auth,
     query,
     where,
 } from "@/plugins/firebase";
 
+/* *--------------------- components ------------------------ */
+import ManageCard from "@/components/ManageCard.vue";
+
 export default defineComponent({
     name: "ManageEdit",
     components: {
-        EditBlock,
+        ManageCard,
     },
     data() {
         return {

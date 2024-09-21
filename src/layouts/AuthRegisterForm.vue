@@ -59,15 +59,20 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
+/* *--------------------- stores ------------------------ */
 import { usePopupStore } from "@/stores/popup-store";
 import { useUserStore } from "@/stores/user-store";
-import type { ISignupFormData } from "@/interfaces/auth-interfaces";
 
+/* *--------------------- types ------------------------ */
+import type { ISignupFormData } from "@/types/signup-types";
+
+/* *--------------------- components ------------------------ */
 import AuthForm from "@/components/AppForm.vue";
-import AuthInput from "../../../components/AppInput.vue";
-import AuthSelect from "../components/AuthSelect.vue";
-import AuthCheckbox from "../components/AuthCheckbox.vue";
-import AuthBtn from "@/components/AppBtn.vue";
+import AuthInput from "@/components/AppInput.vue";
+import AuthSelect from "@/components/AppSelect.vue";
+import AuthCheckbox from "@/components/AppCheckbox.vue";
+import AuthBtn from "@/components/AppButton.vue";
 
 export default defineComponent({
     name: "AuthRegisterForm",

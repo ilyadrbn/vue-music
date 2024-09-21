@@ -18,8 +18,10 @@
 </template>
 
 <script lang="ts">
-import type { ISignupValidationSchema } from "@/interfaces/auth-interfaces";
 import { defineComponent } from "vue";
+
+/* *--------------------- types ------------------------ */
+import type { ISignupValidationSchema } from "@/types/signup-types";
 
 export default defineComponent({
     name: "AuthSelect",

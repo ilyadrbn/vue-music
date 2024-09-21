@@ -21,10 +21,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type {
-    ISignupValidationSchema,
-    InputType,
-} from "@/interfaces/auth-interfaces";
+
+/* *--------------------- types ------------------------ */
+import type { InputType } from "@/types/auth-types";
+import type { ISignupValidationSchema } from "@/types/signup-types";
 
 export default defineComponent({
     name: "AuthInput",

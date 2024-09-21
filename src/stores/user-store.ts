@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+
+/* *--------------------- plugins ------------------------ */
 import {
     auth,
     createUserWithEmailAndPassword,
@@ -9,11 +11,10 @@ import {
     doc,
     setDoc,
 } from "@/plugins/firebase";
-import type {
-    ISignupFormData,
-    ISigninFormData,
-} from "@/interfaces/auth-interfaces";
 
+/* *--------------------- types ------------------------ */
+import type { ISignupFormData } from "@/types/signup-types";
+import type { ISigninFormData } from "@/types/signin-types";
 interface IUserStore {
     userLoggedIn: boolean;
 }

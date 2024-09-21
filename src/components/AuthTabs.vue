@@ -21,7 +21,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { IAuthMethod } from "@/interfaces/auth-interfaces";
+
+/* *--------------------- types ------------------------ */
+import type { IAuthMethod } from "@/types/auth-types";
 
 export default defineComponent({
     name: "AuthTabs",

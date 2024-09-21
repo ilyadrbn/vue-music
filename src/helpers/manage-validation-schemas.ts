@@ -1,7 +1,7 @@
 import type {
     IManageRules,
     IManageValidationSchema,
-} from "@/interfaces/manage-interfaces";
+} from "@/types/manage-types";
 
 class ManageValidationSchema implements IManageValidationSchema {
     readonly edited_name: IManageRules = {

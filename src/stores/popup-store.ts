@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 
+/* *--------------------- types ------------------------ */
 interface IMsgInfo {
     title: string;
     text: string;

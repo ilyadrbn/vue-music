@@ -35,8 +35,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import UploadDropbox from "../components/UploadDropbox.vue";
-import UploadIndicators from "../components/UploadIndicators.vue";
+/* *--------------------- components ------------------------ */
+import UploadDropbox from "@/components/UploadDropbox.vue";
+import UploadIndicators from "@/components/UploadIndicators.vue";
 
 export default defineComponent({
     name: "ManageUpload",
