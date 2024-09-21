@@ -20,6 +20,14 @@ const routes: RouteRecordRaw[] = [
         },
     },
     {
+        path: "/song/:id",
+        name: "Song",
+        component: () => import("@/pages/PageSong.vue"),
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
         path: "/:pathMatch(.*)*",
         redirect: { name: "Home" },
     },

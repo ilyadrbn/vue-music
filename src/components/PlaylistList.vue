@@ -36,7 +36,6 @@ export default defineComponent({
         };
     },
     created() {
-        console.log("playlist created");
         this.getSongs();
         window.addEventListener("scroll", this.handleScroll);
     },
@@ -75,5 +74,3 @@ export default defineComponent({
     },
 });
 </script>
-
-<style scoped></style>

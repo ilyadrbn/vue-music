@@ -1,35 +1,12 @@
 <template>
-    <!-- animated background -->
-    <section class="relative mb-8 py-20 text-center text-white">
-        <div
-            class="introduction-bg absolute inset-0 h-full w-full bg-contain"
-            style="background-image: url(/public/assets/img/header.png)"
-        ></div>
-        <div class="container mx-auto">
-            <div class="main-header-content text-white">
-                <h1 class="mb-5 text-5xl font-bold">Listen to Great Music!</h1>
-                <p class="mx-auto w-full md:w-8/12">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus et dolor mollis, congue augue non, venenatis elit.
-                    Nunc justo eros, suscipit ac aliquet imperdiet, venenatis et
-                    sapien. Duis sed magna pulvinar, fringilla lorem eget,
-                    ullamcorper urna.
-                </p>
-            </div>
-        </div>
+    <HomeHeader />
 
-        <img
-            class="relative mx-auto -mb-20 mt-5 block w-auto max-w-full"
-            src="/public/assets/img/introduction-music.png"
-        />
-    </section>
-
-    <section v-if="userStore.userLoggedIn" class="container mx-auto">
+    <section class="container mx-auto">
         <div
             class="relative flex flex-col rounded border border-gray-200 bg-white"
         >
             <PlaylistHeader />
-            <Playlist />
+            <Playlist v-if="userStore.userLoggedIn" />
         </div>
     </section>
 </template>
@@ -41,12 +18,14 @@ import { defineComponent } from "vue";
 import { useUserStore } from "@/stores/user-store";
 
 /* *------------------- components -------------------- */
+import HomeHeader from "@/components/PlaylistPageHeader.vue";
 import PlaylistHeader from "@/components/PlaylistHeader.vue";
 import Playlist from "@/components/PlaylistList.vue";
 
 export default defineComponent({
     name: "HomePage",
     components: {
+        HomeHeader,
         PlaylistHeader,
         Playlist,
     },

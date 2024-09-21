@@ -12,5 +12,3 @@ export default defineComponent({
     name: "MusicHeader",
 });
 </script>
-
-<style scoped></style>

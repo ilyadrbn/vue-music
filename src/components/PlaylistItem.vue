@@ -3,9 +3,11 @@
         class="flex cursor-pointer items-center justify-between p-3 pl-6 transition duration-300 hover:bg-gray-50"
     >
         <div>
-            <a href="#" class="block font-bold text-gray-600">{{
-                song.name
-            }}</a>
+            <router-link
+                :to="{ name: 'Song', params: { id: song.id } }"
+                class="block font-bold text-gray-600"
+                >{{ song.name }}</router-link
+            >
             <span class="text-sm text-gray-500">{{ song.artist }}</span>
         </div>
 
@@ -34,5 +36,3 @@ export default defineComponent({
     },
 });
 </script>
-
-<style scoped></style>

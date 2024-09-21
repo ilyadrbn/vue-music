@@ -2,8 +2,11 @@
     <header id="header" class="bg-gray-700">
         <nav class="container mx-6 flex items-center justify-start px-4 py-5">
             <router-link
-                :to="{ path: 'Home' }"
-                class="mr-4 text-2xl font-bold uppercase text-white"
+                :to="{ name: 'Home' }"
+                class="mr-4 text-2xl font-bold uppercase"
+                :class="
+                    $route.name === 'Home' ? 'text-green-500' : 'text-white'
+                "
             >
                 Music
             </router-link>

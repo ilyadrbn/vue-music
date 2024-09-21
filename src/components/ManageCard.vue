@@ -1,7 +1,10 @@
 <template>
     <div class="mb-4 rounded border border-gray-200 p-3">
         <div>
-            <h4 class="inline-block text-2xl font-bold">
+            <h4
+                class="max-w inline-block text-2xl font-bold"
+                style="max-width: calc(100% - 75px)"
+            >
                 {{ fileInfo.artist }} - {{ fileInfo.name }}
             </h4>
             <button
