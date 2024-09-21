@@ -11,6 +11,9 @@ class ManageValidationSchema implements IManageValidationSchema {
         required: false,
         alpha_spaces: true,
     };
+    readonly artist: IManageRules = {
+        required: false,
+    };
 }
 
 export { ManageValidationSchema };

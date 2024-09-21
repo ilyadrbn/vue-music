@@ -1,7 +1,8 @@
 interface ISongMeta {
     uid: string;
     name: string;
-    genre: string;
+    artist?: string;
+    genre?: string;
     countOfComment: number;
     fileUrl: string;
 }
@@ -14,6 +15,7 @@ interface IManageRules {
 interface IManageValidationSchema {
     readonly edited_name: IManageRules;
     readonly genre: IManageRules;
+    readonly artist: IManageRules;
 }
 
 export type { ISongMeta, IManageRules, IManageValidationSchema };

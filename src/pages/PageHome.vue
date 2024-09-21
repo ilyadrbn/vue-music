@@ -24,8 +24,7 @@
         />
     </section>
 
-    <!-- Main Content -->
-    <section class="container mx-auto">
+    <section v-if="userStore.userLoggedIn" class="container mx-auto">
         <div
             class="relative flex flex-col rounded border border-gray-200 bg-white"
         >
@@ -38,8 +37,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-/* *------------------- plugins -------------------- */
-// import { songsCollection } from "@/plugins/firebase-firestore";
+/* *------------------- stores -------------------- */
+import { useUserStore } from "@/stores/user-store";
 
 /* *------------------- components -------------------- */
 import PlaylistHeader from "@/components/PlaylistHeader.vue";
@@ -51,6 +50,10 @@ export default defineComponent({
         PlaylistHeader,
         Playlist,
     },
-    async created() {},
+    data() {
+        return {
+            userStore: useUserStore(),
+        };
+    },
 });
 </script>

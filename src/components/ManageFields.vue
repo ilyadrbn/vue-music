@@ -8,6 +8,13 @@
             :bails="false"
         />
         <EditInput
+            name="artist"
+            type="text"
+            placeholder="Enter Artist"
+            label="Artist"
+            :bails="false"
+        />
+        <EditInput
             name="genre"
             type="text"
             placeholder="Enter Genre"
@@ -71,9 +78,10 @@ export default defineComponent({
         async edit(values: IManageValidationSchema): Promise<void> {
             this.popupStore.isLoaderOpen = true;
             try {
+                console.log(values.genre);
                 await updateDoc(doc(db, "songs", this.fileInfo.id), {
                     name: values.edited_name,
-                    genre: values.genre,
+                    genre: values.genre ?? "",
                 });
                 this.popupStore.showMessage(
                     "Success",

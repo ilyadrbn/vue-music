@@ -47,13 +47,13 @@ export default defineComponent({
             }[],
         };
     },
-    async created() {
+    created() {
         // ? https://firebase.google.com/docs/firestore/query-data/listen?hl=ru&authuser=0#listen_to_multiple_documents_in_a_collection
-        const q = await query(
+        const q = query(
             songsCollection,
             where("uid", "==", auth.currentUser?.uid),
         );
-        await onSnapshot(q, (doc) => {
+        onSnapshot(q, (doc) => {
             this.fileList = doc.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,

@@ -93,7 +93,14 @@ export default defineComponent({
                     async () => {
                         const songMeta: ISongMeta = {
                             uid: auth.currentUser!.uid,
-                            name: file.name.replace(/\.[^/.]+$/, ""),
+                            name:
+                                file.name
+                                    .replace(/\.[^/.]+$/, "")
+                                    .split("-")[1] ?? "",
+                            artist:
+                                file.name
+                                    .replace(/\.[^/.]+$/, "")
+                                    .split("-")[0] ?? "",
                             genre: "",
                             countOfComment: 0,
                             fileUrl: "",

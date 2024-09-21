@@ -4,11 +4,15 @@ import {
     doc,
     setDoc,
     addDoc,
+    getDocs,
     updateDoc,
     deleteDoc,
     onSnapshot,
     query,
     where,
+    limit,
+    startAfter,
+    orderBy,
 } from "firebase/firestore";
 import { app } from "./firebase";
 
@@ -21,9 +25,13 @@ export {
     doc,
     setDoc,
     addDoc,
+    getDocs,
     updateDoc,
     deleteDoc,
     onSnapshot,
     query,
     where,
+    limit,
+    startAfter,
+    orderBy,
 };
