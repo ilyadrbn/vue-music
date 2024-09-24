@@ -25,6 +25,7 @@ const useUserStore = defineStore("userStore", {
     },
     actions: {
         async createUser(values: ISignupFormData): Promise<void> {
+            console.log(values);
             Promise.all([
                 await createUserWithEmailAndPassword(
                     auth,
@@ -54,7 +55,7 @@ const useUserStore = defineStore("userStore", {
             Promise.all([
                 await signInWithPopup(auth, googleProvider),
                 await setDoc(doc(db, "users", auth.currentUser!.uid), {
-                    name: auth.currentUser!.displayName || "Guest",
+                    name: auth.currentUser?.displayName || "Guest",
                     email: auth.currentUser!.email,
                     age: 18,
                     country: null,

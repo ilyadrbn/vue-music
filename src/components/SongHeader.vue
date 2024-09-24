@@ -14,8 +14,9 @@
             </button>
             <div class="z-50 ml-8 text-left">
                 <!-- Song Info -->
-                <div class="text-3xl font-bold">Song Title</div>
-                <div>Blues Rock</div>
+                <div class="text-3xl font-bold">{{ name }}</div>
+                <div>{{ artist }}</div>
+                <div>{{ genre }}</div>
             </div>
         </div>
     </section>
@@ -25,6 +26,23 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-   name: "SongHeader",
+    name: "SongHeader",
+    props: {
+        name: {
+            type: String,
+            required: true,
+            default: "",
+        },
+        artist: {
+            type: String,
+            required: true,
+            default: "",
+        },
+        genre: {
+            type: String,
+            required: false,
+            default: null,
+        },
+    },
 });
 </script>

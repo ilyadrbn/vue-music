@@ -78,7 +78,6 @@ export default defineComponent({
         async edit(values: IManageValidationSchema): Promise<void> {
             this.popupStore.isLoaderOpen = true;
             try {
-                console.log(values.genre);
                 await updateDoc(doc(db, "songs", this.fileInfo.id), {
                     name: values.edited_name,
                     genre: values.genre ?? "",

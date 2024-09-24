@@ -7,6 +7,11 @@
             <input
                 :id="name"
                 class="'block focus:outline-none' w-full rounded border border-gray-300 px-3 py-1.5 text-gray-800 transition duration-500 focus:border-black"
+                :class="
+                    name === 'comment'
+                        ? 'mb-4 block w-full rounded border border-gray-300 px-3 py-1.5 text-gray-800 transition duration-500 focus:border-black focus:outline-none'
+                        : ''
+                "
                 :placeholder="placeholder"
                 :type="type"
                 :autocomplete="autocomplete"
