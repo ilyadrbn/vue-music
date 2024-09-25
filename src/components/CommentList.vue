@@ -1,6 +1,7 @@
 <template>
+    {{ commentList }}
     <ul class="container mx-auto">
-        <SongCommentItem
+        <CommentItem
             v-for="(comment, index) in commentList"
             :key="index"
             :comment="comment"
@@ -15,12 +16,12 @@ import { defineComponent } from "vue";
 import type { IComment } from "@/types/comments-types";
 
 /* *--------------------- components ------------------------ */
-import SongCommentItem from "./SongCommentItem.vue";
+import CommentItem from "./CommentItem.vue";
 
 export default defineComponent({
     name: "SongCommentList",
     components: {
-        SongCommentItem,
+        CommentItem,
     },
     props: {
         commentList: {

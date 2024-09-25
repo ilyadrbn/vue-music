@@ -1,7 +1,7 @@
 <template>
     <SongHeader :name="song.name" :artist="song.artist" :genre="song.genre" />
     <SongForm @update-comments="updateComments" />
-    <SongCommentList :comment-list />
+    <CommentList :comment-list />
 </template>
 
 <script lang="ts">
@@ -17,14 +17,14 @@ import type { IComment } from "@/types/comments-types";
 /* *--------------------- components ------------------------ */
 import SongHeader from "@/components/SongHeader.vue";
 import SongForm from "@/layouts/SongForm.vue";
-import SongCommentList from "@/components/SongCommentList.vue";
+import CommentList from "@/components/CommentList.vue";
 
 export default defineComponent({
     name: "PageSong",
     components: {
         SongHeader,
         SongForm,
-        SongCommentList,
+        CommentList,
     },
     data() {
         return {

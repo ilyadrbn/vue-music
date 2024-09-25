@@ -27,12 +27,7 @@
                         >Submit</comment-submit-button
                     >
                 </comment-form>
-                <select
-                    class="mt-4 block rounded border border-gray-300 px-3 py-1.5 text-gray-800 transition duration-500 focus:border-black focus:outline-none"
-                >
-                    <option value="1">Latest</option>
-                    <option value="2">Oldest</option>
-                </select>
+                <CommentSort />
             </div>
         </div>
     </section>
@@ -65,6 +60,7 @@ import type { IComment } from "@/types/comments-types";
 import CommentForm from "@/components/AppForm.vue";
 import CommentInput from "@/components/AppInput.vue";
 import CommentSubmitButton from "@/components/AppButton.vue";
+import CommentSort from "@/components/CommentSort.vue";
 
 export default defineComponent({
     name: "SongForm",
@@ -72,6 +68,7 @@ export default defineComponent({
         CommentForm,
         CommentInput,
         CommentSubmitButton,
+        CommentSort,
     },
     emits: ["update-comments"],
     data() {
