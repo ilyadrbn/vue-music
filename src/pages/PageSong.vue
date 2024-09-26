@@ -1,6 +1,6 @@
 <template>
     <SongHeader :name="song.name" :artist="song.artist" :genre="song.genre" />
-    <SongForm @update-comments="updateComments" />
+    <SongForm @update-comments="updateComments" @sort-by="sortBy" />
     <CommentList :comment-list />
 </template>
 
@@ -44,7 +44,35 @@ export default defineComponent({
     },
     methods: {
         updateComments(commentList: Array<IComment>) {
-            this.commentList = commentList;
+            this.commentList = commentList
+                .slice()
+                .sort(
+                    (a, b) =>
+                        Date.parse(b.createdAt.toString()) -
+                        Date.parse(a.createdAt.toString()),
+                );
+        },
+        sortBy(sortMeth: string) {
+            switch (sortMeth) {
+                case "Latest":
+                    this.commentList = this.commentList
+                        .slice()
+                        .sort(
+                            (a, b) =>
+                                Date.parse(b.createdAt.toString()) -
+                                Date.parse(a.createdAt.toString()),
+                        );
+                    break;
+                case "Oldest":
+                    this.commentList = this.commentList
+                        .slice()
+                        .sort(
+                            (a, b) =>
+                                Date.parse(a.createdAt.toString()) -
+                                Date.parse(b.createdAt.toString()),
+                        );
+                    break;
+            }
         },
     },
 });

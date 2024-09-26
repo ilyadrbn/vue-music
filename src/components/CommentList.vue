@@ -1,5 +1,4 @@
 <template>
-    {{ commentList }}
     <ul class="container mx-auto">
         <CommentItem
             v-for="(comment, index) in commentList"

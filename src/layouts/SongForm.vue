@@ -27,7 +27,7 @@
                         >Submit</comment-submit-button
                     >
                 </comment-form>
-                <CommentSort />
+                <CommentSort @sort-by="sortBy" />
             </div>
         </div>
     </section>
@@ -70,7 +70,7 @@ export default defineComponent({
         CommentSubmitButton,
         CommentSort,
     },
-    emits: ["update-comments"],
+    emits: ["update-comments", "sortBy"],
     data() {
         return {
             popupStore: usePopupStore(),
@@ -94,6 +94,9 @@ export default defineComponent({
         });
     },
     methods: {
+        sortBy(sortMeth: string) {
+            this.$emit("sortBy", sortMeth);
+        },
         async getUser() {
             const usersref = doc(db, "users", String(auth.currentUser?.uid));
             const userSnap = (await getDoc(usersref)).data();
