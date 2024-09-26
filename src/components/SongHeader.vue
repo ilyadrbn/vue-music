@@ -9,8 +9,16 @@
             <button
                 type="button"
                 class="z-50 h-24 w-24 rounded-full bg-white text-3xl text-black focus:outline-none"
+                @click.prevent="playMusic(songInfo as ISongMeta)"
             >
-                <i class="fas fa-play"></i>
+                <i
+                    class="fa"
+                    :class="{
+                        'fa-play': !isCurrentSong || !isPlaying,
+                        'fa-refresh fa-spin ': isPlaying && isCurrentSong,
+                        // 'fa-refresh fa-spin fa-3x fa-fw': isPlaying && !isCurrentSong,
+                    }"
+                ></i>
             </button>
             <div class="z-50 ml-8 text-left">
                 <!-- Song Info -->
@@ -24,6 +32,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
+/* *--------------------- stores ------------------------ */
+import { useMusicStore } from "@/stores/music-store";
+
+/* *--------------------- types ------------------------ */
+import type { ISongMeta } from "@/types/manage-types";
 
 export default defineComponent({
     name: "SongHeader",
@@ -42,6 +56,29 @@ export default defineComponent({
             type: String,
             required: false,
             default: null,
+        },
+        songInfo: {
+            type: Object,
+            required: true,
+            default: () => ({}),
+        },
+    },
+    data() {
+        return {
+            musicStore: useMusicStore(),
+        };
+    },
+    computed: {
+        isPlaying(): boolean {
+            return this.musicStore.isPlaying;
+        },
+        isCurrentSong(): boolean {
+            return (this.musicStore.currentSong as ISongMeta).name == this.name;
+        },
+    },
+    methods: {
+        async playMusic(song: ISongMeta) {
+            await this.musicStore.playMusic(song);
         },
     },
 });

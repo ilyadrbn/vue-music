@@ -82,6 +82,8 @@ export default defineComponent({
         const docRef = doc(db, "comments", String(this.$route.params.id));
 
         onSnapshot(docRef, (doc) => {
+            if (!doc.data()) return;
+
             this.commentList = [];
             this.commentList.push(
                 ...(doc.data()?.comments.map((comment: IComment) => ({

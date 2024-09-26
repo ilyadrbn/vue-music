@@ -1,5 +1,10 @@
 <template>
-    <SongHeader :name="song.name" :artist="song.artist" :genre="song.genre" />
+    <SongHeader
+        :name="song.name"
+        :artist="song.artist"
+        :genre="song.genre"
+        :song-info="song"
+    />
     <SongForm @update-comments="updateComments" @sort-by="sortBy" />
     <CommentList :comment-list />
 </template>
@@ -53,24 +58,21 @@ export default defineComponent({
                 );
         },
         sortBy(sortMeth: string) {
+            this.commentList = this.commentList.slice();
             switch (sortMeth) {
                 case "Latest":
-                    this.commentList = this.commentList
-                        .slice()
-                        .sort(
-                            (a, b) =>
-                                Date.parse(b.createdAt.toString()) -
-                                Date.parse(a.createdAt.toString()),
-                        );
+                    this.commentList.sort(
+                        (a, b) =>
+                            Date.parse(b.createdAt.toString()) -
+                            Date.parse(a.createdAt.toString()),
+                    );
                     break;
                 case "Oldest":
-                    this.commentList = this.commentList
-                        .slice()
-                        .sort(
-                            (a, b) =>
-                                Date.parse(a.createdAt.toString()) -
-                                Date.parse(b.createdAt.toString()),
-                        );
+                    this.commentList.sort(
+                        (a, b) =>
+                            Date.parse(a.createdAt.toString()) -
+                            Date.parse(b.createdAt.toString()),
+                    );
                     break;
             }
         },
