@@ -1,6 +1,6 @@
 <template>
     <div
-        v-if="isPlaying"
+        v-if="Object.keys(currentSong).length"
         class="fixed bottom-0 left-0 w-full bg-white px-4 py-2"
     >
         <div class="text-center">
@@ -20,7 +20,10 @@
                 ></i>
             </button>
             <div class="player-currenttime">{{ seek }}</div>
-            <div class="relative h-2 w-full cursor-pointer rounded bg-gray-200">
+            <div
+                class="relative h-2 w-full cursor-pointer rounded bg-gray-200"
+                @click.prevent="setSeek($event)"
+            >
                 <span
                     class="absolute -top-2.5 -ml-2.5 text-lg text-gray-800"
                     :style="{ left: playerProgress }"
@@ -73,6 +76,9 @@ export default defineComponent({
     methods: {
         toggleMusic() {
             this.musicStore.toggleMusic();
+        },
+        setSeek(event: MouseEvent) {
+            this.musicStore.setSeek(event);
         },
     },
 });

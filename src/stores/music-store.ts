@@ -17,6 +17,15 @@ const useMusicStore = defineStore("musicStore", {
             playerProgress: "0%" as string,
         };
     },
+    getters: {
+        isPlaying: (state): boolean => {
+            if (state.sound.playing) {
+                return state.sound.playing();
+            }
+
+            return false;
+        },
+    },
     actions: {
         async playMusic(song: ISongMeta): Promise<void> {
             if (
@@ -62,14 +71,17 @@ const useMusicStore = defineStore("musicStore", {
                 requestAnimationFrame(this.progress);
             }
         },
-    },
-    getters: {
-        isPlaying: (state): boolean => {
-            if (state.sound.playing) {
-                return state.sound.playing();
-            }
+        setSeek(event: MouseEvent) {
+            const { x, width } = (
+                event.currentTarget as HTMLElement
+            ).getBoundingClientRect();
 
-            return false;
+            const clickX = event.clientX - x;
+            const persantage = clickX / width;
+
+            const seconds = this.sound.duration() * persantage;
+            this.sound.seek(seconds);
+            this.sound.play();
         },
     },
 });

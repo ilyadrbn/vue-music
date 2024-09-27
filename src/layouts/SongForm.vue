@@ -45,6 +45,7 @@ import {
     getDoc,
     onSnapshot,
     arrayUnion,
+    updateDoc,
 } from "@/plugins/firebase-firestore";
 
 /* *--------------------- helpers ------------------------ */
@@ -129,6 +130,17 @@ export default defineComponent({
                     },
                     { merge: true },
                 );
+                const songCollectionRef = doc(
+                    db,
+                    "songs",
+                    String(this.$route.params.id),
+                );
+                const songDoc = await getDoc(songCollectionRef);
+                const currentCount = songDoc.data()?.countOfComment || 0;
+                await updateDoc(songCollectionRef, {
+                    countOfComment: currentCount + 1,
+                });
+
                 this.popupStore.showMessage(
                     "Success",
                     "Comment added successfully.",
