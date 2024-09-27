@@ -1,12 +1,14 @@
 <template>
-    <SongHeader
-        :name="song.name"
-        :artist="song.artist"
-        :genre="song.genre"
-        :song-info="song"
-    />
-    <SongForm @update-comments="updateComments" @sort-by="sortBy" />
-    <CommentList :comment-list />
+    <main>
+        <SongHeader
+            :name="song.name"
+            :artist="song.artist"
+            :genre="song.genre"
+            :song-info="song"
+        />
+        <SongForm @update-comments="updateComments" @sort-by="sortBy" />
+        <CommentList :comment-list />
+    </main>
 </template>
 
 <script lang="ts">

@@ -1,14 +1,16 @@
 <template>
-    <HomeHeader />
+    <main>
+        <HomeHeader />
 
-    <section class="container mx-auto">
-        <div
-            class="relative flex flex-col rounded border border-gray-200 bg-white"
-        >
-            <PlaylistHeader />
-            <Playlist v-if="userStore.userLoggedIn" />
-        </div>
-    </section>
+        <section class="container mx-auto">
+            <div
+                class="relative flex flex-col rounded border border-gray-200 bg-white"
+            >
+                <PlaylistHeader />
+                <Playlist v-if="userStore.userLoggedIn" />
+            </div>
+        </section>
+    </main>
 </template>
 
 <script lang="ts">

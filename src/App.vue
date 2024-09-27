@@ -1,6 +1,10 @@
 <template>
     <AppHeader />
-    <RouterView />
+    <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+            <component :is="Component"></component>
+        </transition>
+    </router-view>
     <AppAuth />
     <AppPlayer />
     <AppLoader />
@@ -27,3 +31,18 @@ export default defineComponent({
     },
 });
 </script>
+
+<style lang="scss" scoped>
+.fade-enter-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from {
+    opacity: 0;
+}
+
+.fade-leave-to {
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}
+</style>

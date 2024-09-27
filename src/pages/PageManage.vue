@@ -1,11 +1,12 @@
 <template>
-    <!-- Main Content -->
-    <section class="container mx-auto mt-6">
-        <div class="md:grid md:grid-cols-3 md:gap-4">
-            <UploadForm />
-            <ManageForm />
-        </div>
-    </section>
+    <main>
+        <section class="container mx-auto mt-6">
+            <div class="md:grid md:grid-cols-3 md:gap-4">
+                <UploadForm />
+                <ManageForm />
+            </div>
+        </section>
+    </main>
 </template>
 
 <script lang="ts">
